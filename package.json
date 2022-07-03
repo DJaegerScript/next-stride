@@ -1,24 +1,22 @@
 {
   "name": "next-strive",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "CLI to generate well-structured next.js folder architecture",
-  "main": "src/index.ts",
+  "main": "./lib/index.js",
   "bin": {
-    "strive": "bin/index.ts"
+    "strive": "./lib/index.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "",
-    "build": "tsc",
+    "test": "echo \"Error: no test specified\"",
+    "reset-build": "rm -rf lib && tsc -p .",
+    "build": "tsc -p .",
+    "local": "npm run build && npm link",
     "check-types": "tsc --pretty --noEmit",
     "check-format": "prettier --check .",
     "check-lint": "eslint . --ext ts --ext tsx --ext js",
     "format": "prettier --write .",
-    "test-all": "yarn check-format && yarn check-lint && yarn check-types",
+    "test-all": "npm run check-format && npm run check-lint && npm run check-types",
     "prepare": "husky install"
-  },
-  "publishConfig": {
-    "access": "public"
   },
   "repository": {
     "type": "git",
@@ -37,14 +35,22 @@
   },
   "homepage": "https://github.com/DJaegerScript/next-strive#readme",
   "devDependencies": {
+    "@types/fs-extra": "^9.0.13",
     "@types/node": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.29.0",
     "@typescript-eslint/parser": "^5.29.0",
     "eslint": ">=5.16.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.5.0",
+    "husky": "^8.0.0",
+    "nodemon": "^2.0.18",
     "prettier": "^2.7.1",
-    "typescript": "^4.7.4",
-    "husky": "^8.0.0"
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "fs-extra": "^10.1.0",
+    "kleur": "^4.1.5"
   }
 }
