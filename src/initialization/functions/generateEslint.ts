@@ -1,12 +1,13 @@
 import fs from 'fs-extra'
 import path from 'path'
-import { eslintConfig, linterIgnoreFiles } from '../constants'
+import { eslintConfig } from '../constants'
+import { parseLinterIgnoredFiles } from '../utils'
 
 export const generateEslint = (root: string) => {
   fs.chmod(root, fs.constants.S_IRWXU, () => {
     fs.writeFileSync(
       path.join(root, '.eslintignore'),
-      JSON.stringify(linterIgnoreFiles),
+      parseLinterIgnoredFiles(),
       { flag: 'w' }
     )
 

@@ -1,12 +1,13 @@
 import fs from 'fs-extra'
 import path from 'path'
-import { linterIgnoreFiles, prettierConfig } from '../constants'
+import { prettierConfig } from '../constants'
+import { parseLinterIgnoredFiles } from '../utils'
 
 export const generatePrettier = (root: string) => {
   fs.chmod(root, fs.constants.S_IRWXU, () => {
     fs.writeFileSync(
       path.join(root, '.prettierignore'),
-      JSON.stringify(linterIgnoreFiles),
+      parseLinterIgnoredFiles(),
       { flag: 'w' }
     )
 
