@@ -1,6 +1,14 @@
 import path from 'path'
 import fs from 'fs-extra'
-import { generateComponents, generateEslint, moveFiles } from './functions'
+import { exec } from 'child_process'
+import {
+  generateComponents,
+  generateEslint,
+  moveFiles,
+  updatePackage,
+  generatePrettier,
+  updateHusky,
+} from './functions'
 import { directories } from './constants'
 
 const striveInit = async () => {
@@ -13,7 +21,13 @@ const striveInit = async () => {
 
   await moveFiles(srcDir)
   await generateComponents(srcDir, directories)
+
   generateEslint(rootDir)
+  generatePrettier(rootDir)
+
+  updatePackage(rootDir)
+
+  exec('npx husky-init && npm i && npm run test-all', () => updateHusky())
 }
 
 export default striveInit
