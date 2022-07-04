@@ -34,3 +34,22 @@ export const eslintConfig = {
     },
   },
 }
+
+export const prettierConfig = {
+  endOfLine: 'lf',
+  printWidth: 80,
+  tabWidth: 2,
+  trailingComma: 'es5',
+  singleQuote: true,
+  semi: false,
+}
+
+export const linterIgnoreFiles = [
+  '.next',
+  'next-env.d.ts',
+  'node_modules',
+  'yarn.lock',
+  'package-lock.json',
+  'pnpm-lock.yaml',
+  'public',
+]
