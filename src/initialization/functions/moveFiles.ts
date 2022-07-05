@@ -1,10 +1,10 @@
 import path from 'path'
 import fs from 'fs-extra'
 
-export const moveFiles = async (src: string) => {
+export const moveFiles = (src: string) => {
   const pagesDir = path.join(process.cwd(), 'pages')
   const stylesDir = path.join(process.cwd(), 'styles')
 
-  await fs.move(pagesDir, path.join(src, 'pages'))
-  await fs.move(stylesDir, path.join(src, 'styles'))
+  fs.moveSync(pagesDir, path.join(src, 'pages'))
+  fs.moveSync(stylesDir, path.join(src, 'styles'))
 }

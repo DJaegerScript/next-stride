@@ -16,11 +16,13 @@ const striveInit = async () => {
   const nextConfig = path.join(rootDir, 'next.config.js')
   const srcDir = path.join(rootDir, 'src')
 
+  fs.chmodSync(rootDir, fs.constants.S_IRWXU)
+
   if (!fs.existsSync(nextConfig))
     throw new Error('Strive init failed, project is not a next app')
 
-  await moveFiles(srcDir)
-  await generateComponents(srcDir, directories)
+  moveFiles(srcDir)
+  generateComponents(srcDir, directories)
 
   generateEslint(rootDir)
   generatePrettier(rootDir)
