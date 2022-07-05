@@ -3,13 +3,11 @@ import fs from 'fs-extra'
 import { exec } from 'child_process'
 import {
   generateComponents,
-  generateEslint,
+  generateLinter,
   moveFiles,
   updatePackage,
-  generatePrettier,
   updateHusky,
 } from './functions'
-import { directories } from './constants'
 
 const striveInit = async () => {
   const rootDir = process.cwd()
@@ -22,11 +20,8 @@ const striveInit = async () => {
     throw new Error('Strive init failed, project is not a next app')
 
   moveFiles(srcDir)
-  generateComponents(srcDir, directories)
-
-  generateEslint(rootDir)
-  generatePrettier(rootDir)
-
+  generateComponents(srcDir)
+  generateLinter(rootDir)
   updatePackage(rootDir)
 
   exec('npx husky-init && npm i && npm run test-all', () => updateHusky())

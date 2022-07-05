@@ -1,8 +1,9 @@
 import fs from 'fs-extra'
 import path from 'path'
-import { generateComponentsIndex } from '../utils'
+import { directories } from './constants'
+import generateIndexContent from './generateIndexContent'
 
-export const generateComponents = (src: string, directories: string[]) => {
+export const generateComponents = (src: string) => {
   const componentsDir = path.join(src, 'components')
 
   fs.mkdirSync(componentsDir)
@@ -17,6 +18,6 @@ export const generateComponents = (src: string, directories: string[]) => {
 
   fs.writeFileSync(
     path.join(componentsDir, 'index.ts'),
-    generateComponentsIndex(directories)
+    generateIndexContent(directories)
   )
 }
