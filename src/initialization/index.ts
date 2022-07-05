@@ -1,12 +1,11 @@
 import path from 'path'
 import fs from 'fs-extra'
-import { exec } from 'child_process'
+import { execSync } from 'child_process'
 import {
   generateComponents,
   generateLinter,
   moveFiles,
   updatePackage,
-  updateHusky,
 } from './functions'
 
 const striveInit = async () => {
@@ -24,7 +23,9 @@ const striveInit = async () => {
   generateLinter(rootDir)
   updatePackage(rootDir)
 
-  exec('npx husky-init && npm i && npm run test-all', () => updateHusky())
+  execSync(
+    "npm i && npx husky install && npx husky add .husky/pre-commit 'npm run test-all' && npm run test-all"
+  )
 }
 
 export default striveInit
