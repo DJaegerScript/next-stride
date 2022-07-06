@@ -4,9 +4,9 @@ import kleur from 'kleur'
 
 import striveInit from './initialization'
 
-const main = async (argv: string[]) => {
+const main = (argv: string[]) => {
   try {
-    await striveInit()
+    striveInit()
   } catch (error: any) {
     console.error(
       kleur.bold().bgRed().yellow('ERROR'),

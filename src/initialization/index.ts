@@ -8,7 +8,7 @@ import {
   updatePackage,
 } from './functions'
 
-const striveInit = async () => {
+const striveInit = () => {
   const rootDir = process.cwd()
   const nextConfig = path.join(rootDir, 'next.config.js')
   const srcDir = path.join(rootDir, 'src')
