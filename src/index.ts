@@ -21,10 +21,6 @@ const main = (argv: string[]) => {
     striveInit(program)
 
     program.showHelpAfterError().parse()
-
-    // const limit = options.first ? 1 : undefined
-    // console.log(program.args[0].split(options.separator, limit))
-    // striveInit()
   } catch (error: any) {
     console.error(
       kleur.bold().bgRed().yellow('ERROR'),

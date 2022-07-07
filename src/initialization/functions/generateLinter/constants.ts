@@ -33,11 +33,4 @@ export const prettierConfig = {
   semi: false,
 }
 
-export const linterIgnoreFiles = [
-  '.next',
-  'node_modules',
-  'yarn.lock',
-  'package-lock.json',
-  'pnpm-lock.yaml',
-  'public',
-]
+export const linterIgnoreFiles = ['.next', 'node_modules', 'public']

@@ -1,7 +1,7 @@
 import fs from 'fs-extra'
 import path from 'path'
 
-const updatePackage = (root: string, fileType: string) => {
+const updatePackage = (root: string, fileType: string, command: string) => {
   const packagePathFile = path.join(root, 'package.json')
 
   const packageStringContent = fs.existsSync(packagePathFile)
@@ -19,8 +19,8 @@ const updatePackage = (root: string, fileType: string) => {
       'check-format': 'prettier --check .',
       'check-lint': 'eslint . --ext ts --ext tsx --ext js',
       format: 'prettier --write .',
-      'test-all': `npm run format && npm run check-format && npm run check-lint ${
-        fileType === '.ts' ? '&& npm run check-types' : ''
+      'test-all': `${command} format && ${command} check-format && ${command} check-lint ${
+        fileType === '.ts' ? '&& ${packageManagerCommand} check-types' : ''
       }`,
       prepare: 'husky install',
     },

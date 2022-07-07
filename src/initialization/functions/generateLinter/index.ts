@@ -3,10 +3,12 @@ import path from 'path'
 import { eslintConfig, prettierConfig } from './constants'
 import { parseLinterIgnoredFiles } from './parseLinterIgnoredFiles'
 
-const generateLinter = (root: string, fileType: string) => {
+const generateLinter = (root: string, fileType: string, lockFile: string) => {
+  const parsedLinterIgnoredFiles = parseLinterIgnoredFiles(fileType, lockFile)
+
   fs.writeFileSync(
     path.join(root, '.prettierignore'),
-    parseLinterIgnoredFiles(fileType),
+    parsedLinterIgnoredFiles,
     { flag: 'w' }
   )
 
@@ -16,11 +18,9 @@ const generateLinter = (root: string, fileType: string) => {
     { flag: 'w' }
   )
 
-  fs.writeFileSync(
-    path.join(root, '.eslintignore'),
-    parseLinterIgnoredFiles(fileType),
-    { flag: 'w' }
-  )
+  fs.writeFileSync(path.join(root, '.eslintignore'), parsedLinterIgnoredFiles, {
+    flag: 'w',
+  })
 
   if (fileType === '.ts') {
     eslintConfig.parser = '@typescript-eslint/parser'
