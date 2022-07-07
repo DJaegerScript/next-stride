@@ -3,7 +3,7 @@ import path from 'path'
 import { eslintConfig, prettierConfig } from './constants'
 import { parseLinterIgnoredFiles } from './parseLinterIgnoredFiles'
 
-export const generateLinter = (root: string) => {
+const generateLinter = (root: string) => {
   fs.writeFileSync(
     path.join(root, '.prettierignore'),
     parseLinterIgnoredFiles(),
@@ -28,3 +28,5 @@ export const generateLinter = (root: string) => {
     { flag: 'w' }
   )
 }
+
+export default generateLinter

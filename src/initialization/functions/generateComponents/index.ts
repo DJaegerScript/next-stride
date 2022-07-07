@@ -3,7 +3,7 @@ import path from 'path'
 import { directories } from './constants'
 import generateIndexContent from './generateIndexContent'
 
-export const generateComponents = (src: string) => {
+const generateComponents = (src: string) => {
   const componentsDir = path.join(src, 'components')
 
   fs.mkdirSync(componentsDir)
@@ -21,3 +21,5 @@ export const generateComponents = (src: string) => {
     generateIndexContent(directories)
   )
 }
+
+export default generateComponents

@@ -1,7 +1,7 @@
 import fs from 'fs-extra'
 import path from 'path'
 
-export const updatePackage = (root: string) => {
+const updatePackage = (root: string) => {
   const packagePathFile = path.join(root, 'package.json')
 
   const packageStringContent = fs.existsSync(packagePathFile)
@@ -41,3 +41,5 @@ export const updatePackage = (root: string) => {
     { flag: 'w' }
   )
 }
+
+export default updatePackage
