@@ -1,6 +1,6 @@
 {
   "name": "next-strive",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "CLI to generate well-structured next.js folder architecture",
   "main": "./lib/index.js",
   "bin": {
