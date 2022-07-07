@@ -1,7 +1,7 @@
 import fs from 'fs-extra'
 import path from 'path'
 
-const updatePackage = (root: string) => {
+const updatePackage = (root: string, fileType: string) => {
   const packagePathFile = path.join(root, 'package.json')
 
   const packageStringContent = fs.existsSync(packagePathFile)
@@ -15,18 +15,21 @@ const updatePackage = (root: string) => {
     ...packageParsedContent,
     scripts: {
       ...scripts,
-      'check-types': 'tsc --pretty --noEmit',
+      ...(fileType === '.ts' && { 'check-types': 'tsc --pretty --noEmit' }),
       'check-format': 'prettier --check .',
       'check-lint': 'eslint . --ext ts --ext tsx --ext js',
       format: 'prettier --write .',
-      'test-all':
-        'npm run format && npm run check-format && npm run check-lint && npm run check-types',
+      'test-all': `npm run format && npm run check-format && npm run check-lint ${
+        fileType === '.ts' ? '&& npm run check-types' : ''
+      }`,
       prepare: 'husky install',
     },
     devDependencies: {
       ...devDependencies,
-      '@typescript-eslint/eslint-plugin': '^5.20.0',
-      '@typescript-eslint/parser': '^5.20.0',
+      ...(fileType === '.ts' && {
+        '@typescript-eslint/eslint-plugin': '^5.20.0',
+        '@typescript-eslint/parser': '^5.20.0',
+      }),
       'eslint-config-google': '^0.14.0',
       'eslint-config-prettier': '^8.5.0',
       'eslint-plugin-react': '^7.29.4',

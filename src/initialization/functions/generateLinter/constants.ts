@@ -4,7 +4,7 @@ export const eslintConfig = {
     es2021: true,
   },
   extends: ['plugin:react/recommended', 'google', 'prettier'],
-  parser: '@typescript-eslint/parser',
+  parser: '',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -12,7 +12,7 @@ export const eslintConfig = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['react', '@typescript-eslint'],
+  plugins: ['react'],
   rules: {
     'require-jsdoc': 'off',
     'new-cap': 'off',
@@ -35,7 +35,6 @@ export const prettierConfig = {
 
 export const linterIgnoreFiles = [
   '.next',
-  'next-env.d.ts',
   'node_modules',
   'yarn.lock',
   'package-lock.json',

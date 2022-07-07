@@ -10,6 +10,8 @@ const initFunction = () => {
   const rootDir = process.cwd()
   const nextConfig = path.join(rootDir, 'next.config.js')
   const srcDir = path.join(rootDir, 'src')
+  const tsConfig = path.join(rootDir, 'tsconfig.json')
+  const fileType = fs.existsSync(tsConfig) ? '.ts' : '.js'
 
   fs.chmodSync(rootDir, fs.constants.S_IRWXU)
 
@@ -17,9 +19,9 @@ const initFunction = () => {
     throw new Error('Strive init failed, project is not a next app')
 
   moveFiles(srcDir)
-  generateComponents(srcDir)
-  generateLinter(rootDir)
-  updatePackage(rootDir)
+  generateComponents(srcDir, fileType)
+  generateLinter(rootDir, fileType)
+  updatePackage(rootDir, fileType)
 
   execSync(
     "npm i && npx husky install && npx husky add .husky/pre-commit 'npm run test-all' && npm run test-all"
