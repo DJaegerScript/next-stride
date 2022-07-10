@@ -20,7 +20,7 @@ const updatePackage = (root: string, fileType: string, command: string) => {
       'check-lint': 'eslint . --ext ts --ext tsx --ext js',
       format: 'prettier --write .',
       'test-all': `${command} format && ${command} check-format && ${command} check-lint ${
-        fileType === '.ts' ? '&& ${packageManagerCommand} check-types' : ''
+        fileType === '.ts' ? `&& ${command} check-types` : ''
       }`,
       prepare: 'husky install',
     },
