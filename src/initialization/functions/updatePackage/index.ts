@@ -33,6 +33,7 @@ const updatePackage = (root: string, fileType: string, command: string) => {
       'eslint-config-google': '^0.14.0',
       'eslint-config-prettier': '^8.5.0',
       'eslint-plugin-react': '^7.29.4',
+      '@tsconfig/next': '^1.0.2',
       prettier: '^2.6.2',
       husky: '^7.0.0',
     },

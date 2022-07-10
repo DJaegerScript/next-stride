@@ -7,6 +7,7 @@ import moveFiles from './moveFiles'
 import generateComponents from './generateComponents'
 import generateLinter from './generateLinter'
 import updatePackage from './updatePackage'
+import generateConfig from './generateConfig'
 
 const initFunction = () => {
   const rootDir = process.cwd()
@@ -38,6 +39,7 @@ const initFunction = () => {
   moveFiles(srcDir)
   generateComponents(srcDir, fileType)
   generateLinter(rootDir, fileType, packageManager.lockFile as string)
+  generateConfig(rootDir, fileType)
   updatePackage(rootDir, fileType, packageManager.command)
 
   execSync(
