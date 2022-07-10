@@ -6,6 +6,7 @@ import { Command } from 'commander'
 // @ts-ignore
 import { version } from '../package.json'
 import striveInit from './initialization'
+import striveGenerate from './generate'
 
 const main = (argv: string[]) => {
   const program = new Command()
@@ -19,6 +20,7 @@ const main = (argv: string[]) => {
       .version(`next-strive@${version}`, '-v, --version')
 
     striveInit(program)
+    striveGenerate(program)
 
     program.showHelpAfterError().parse()
   } catch (error: any) {
