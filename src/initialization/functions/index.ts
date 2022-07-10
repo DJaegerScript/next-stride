@@ -8,13 +8,10 @@ import generateComponents from './generateComponents'
 import generateLinter from './generateLinter'
 import updatePackage from './updatePackage'
 import generateConfig from './generateConfig'
+import { getProjectsData } from '../../helper'
 
 const initFunction = () => {
-  const rootDir = process.cwd()
-  const nextConfig = path.join(rootDir, 'next.config.js')
-  const srcDir = path.join(rootDir, 'src')
-  const tsConfig = path.join(rootDir, 'tsconfig.json')
-  const fileType = fs.existsSync(tsConfig) ? '.ts' : '.js'
+  const { fileType, nextConfig, rootDir, srcDir } = getProjectsData()
 
   const lockFiles = glob.sync(path.join(rootDir, '*lock*'))
   const packageManager = {
@@ -30,8 +27,6 @@ const initFunction = () => {
       : 'npm run',
     lockFile: lockFiles[0].split('/').pop(),
   }
-
-  fs.chmodSync(rootDir, fs.constants.S_IRWXU)
 
   if (!fs.existsSync(nextConfig))
     throw new Error('Strive init failed, project is not a next app')
