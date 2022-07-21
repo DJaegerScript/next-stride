@@ -46,14 +46,18 @@ export const createComplementaryFile = (dir: string, fileType: string) => {
     )
 }
 
-export const appendIndex = (module: string, dir: string) => {
+export const appendIndex = (component: string, dir: string) => {
   const indexContent = fs.readFileSync(dir, 'utf-8')
 
-  const indexContents = indexContent.split('\n')
+  const rawIndexContents = indexContent.split('\n')
+
+  const indexContents = rawIndexContents.filter(
+    (rawIndexContent) => rawIndexContent !== ''
+  )
 
   indexContents.includes("export * from './'") && indexContents.shift()
 
-  indexContents.push(`export * from './${module}'`)
+  indexContents.push(`export * from './${component}'`)
 
   fs.writeFileSync(dir, indexContents.join('\n'), 'utf-8')
 }
