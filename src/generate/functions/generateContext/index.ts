@@ -1,7 +1,7 @@
 import fs from 'fs-extra'
 import path from 'path'
-import { appendIndex, createComplementaryFile } from '../../../helper'
 import generateContextContent from './generateContextContent'
+import { appendIndex, createComplementaryFile } from '../../../helper'
 
 const generateContext = (
   components: string,
@@ -10,21 +10,21 @@ const generateContext = (
 ) => {
   const contextDir = path.join(components, 'contexts')
   const fileName = `${name}Context`
-  const contextFileDir = path.join(contextDir, fileName)
+  const dirName = path.join(contextDir, fileName)
 
-  fs.mkdirSync(contextFileDir)
+  fs.mkdirSync(dirName)
 
   appendIndex(fileName, path.join(contextDir, `index${fileType}`))
 
   fs.writeFileSync(
-    path.join(contextFileDir, `index${fileType}x`),
+    path.join(dirName, `index${fileType}x`),
     generateContextContent(name),
     {
       flag: 'w',
     }
   )
 
-  createComplementaryFile(contextFileDir, fileType)
+  createComplementaryFile(dirName, fileType)
 }
 
 export default generateContext
