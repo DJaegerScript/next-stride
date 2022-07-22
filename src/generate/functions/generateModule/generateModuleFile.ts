@@ -7,7 +7,8 @@ const generateModuleFile = (
   dirName: string,
   moduleName: string,
   moduleDir: string,
-  fileType: string
+  fileType: string,
+  isSSR: boolean
 ) => {
   fs.mkdirSync(dirName)
 
@@ -15,7 +16,7 @@ const generateModuleFile = (
 
   fs.writeFileSync(
     path.join(dirName, `index${fileType}x`),
-    generateModuleContent(moduleName),
+    generateModuleContent(moduleName, isSSR),
     {
       flag: 'w',
     }
