@@ -1,10 +1,10 @@
 import path from 'path'
 import fs from 'fs-extra'
 import generateModulePageContent from './generateModulePageContent'
-import generateModuleFile from './generateModuleFile'
 import generatePageFile from './generatePageFile'
 import { capitalize, createComplementaryFile } from '../../../helper'
 import generateSSRFile from './generateSSRFile'
+import generateModuleFile from './generateModuleFile'
 
 interface Options {
   P: string
@@ -25,10 +25,6 @@ const generateModule = (
   const pageDir = path.join(components, '../pages', pagePath)
   const pageName = path.parse(pagePath).base
 
-  const SSRName = `get${capitalize(name)}Props`
-  const SSRDir = path.join(components, 'ssr')
-  isSSR && generateSSRFile(SSRName, SSRDir, fileType)
-
   if (fs.existsSync(pageDir)) {
     throw new Error('Page already exists')
   } else if (!fs.existsSync(path.parse(pageDir).dir)) {
@@ -37,11 +33,19 @@ const generateModule = (
     throw new Error('Module already exists')
   }
 
-  generatePageFile(
-    pageDir,
-    fileType,
-    generateModulePageContent(capitalize(pageName), moduleName, isSSR, SSRName)
+  const SSRName = `get${capitalize(name)}Props`
+  const SSRDir = path.join(components, 'ssr')
+  isSSR && generateSSRFile(SSRName, SSRDir, fileType)
+
+  const modulePageContent = generateModulePageContent(
+    capitalize(pageName),
+    moduleName,
+    isSSR,
+    SSRName,
+    fileType
   )
+
+  generatePageFile(pageDir, fileType, modulePageContent)
 
   generateModuleFile(dirName, moduleName, moduleDir, fileType, isSSR)
 
