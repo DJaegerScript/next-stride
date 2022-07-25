@@ -11,7 +11,7 @@ const generateSSRFile = (SSRName: string, SSRDir: string, fileType: string) => {
 
   fs.writeFileSync(
     path.join(SSRPath, `index${fileType}`),
-    generateSSRContent(SSRName),
+    generateSSRContent(SSRName, fileType),
     {
       flag: 'w',
     }

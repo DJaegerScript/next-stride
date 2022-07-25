@@ -17,7 +17,7 @@ const generateElement = (
 
   fs.writeFileSync(
     path.join(dirName, `index${fileType}x`),
-    generateElementContent(name),
+    generateElementContent(name, fileType),
     {
       flag: 'w',
     }

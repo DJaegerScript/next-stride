@@ -18,7 +18,7 @@ const generateContext = (
 
   fs.writeFileSync(
     path.join(dirName, `index${fileType}x`),
-    generateContextContent(name),
+    generateContextContent(name, fileType),
     {
       flag: 'w',
     }

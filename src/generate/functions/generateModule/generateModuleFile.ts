@@ -16,7 +16,7 @@ const generateModuleFile = (
 
   fs.writeFileSync(
     path.join(dirName, `index${fileType}x`),
-    generateModuleContent(moduleName, isSSR),
+    generateModuleContent(moduleName, isSSR, fileType),
     {
       flag: 'w',
     }

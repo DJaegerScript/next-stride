@@ -1,5 +1,11 @@
-const generateSSRContent = (name: string) => {
-  return `export const ${name} = async (context) => {
+const generateSSRContent = (name: string, fileType: string) => {
+  return `${
+    fileType === '.ts' ? 'import type {GetServerSideProps} from "next"' : ''
+  } 
+  
+  export const ${name}${
+    fileType === '.ts' ? ': GetServerSideProps' : ''
+  } = async (context) => {
         // TODO: Write ssr's logic
   return {
     props: {

@@ -2,18 +2,19 @@ const generateModulePageContent = (
   name: string,
   moduleName: string,
   isSSR: boolean,
-  SSRName: string
+  SSRName: string,
+  fileType: string
 ) => {
   return `import React from 'react'
-import type { NextPage } from 'next'
 import { ${moduleName} } from '@modules'
-${isSSR && `import { ${SSRName} } from '@ssr'`}
+${fileType === '.ts' ? "import type { NextPage } from 'next'" : ''}
+${isSSR ? `import { ${SSRName} } from '@ssr'` : ''}
 
-const ${name}: NextPage = (${isSSR && 'props'}) => <${moduleName} ${
-    isSSR && '{...props}'
-  }/>
+const ${name}${fileType === '.ts' ? ': NextPage' : ''} = (${
+    isSSR ? 'props' : ''
+  }) => <${moduleName} ${isSSR ? '{...props}' : ''}/>
 
-${isSSR && `export const getServerSideProps = ${SSRName}`}
+${isSSR ? `export const getServerSideProps = ${SSRName}` : ''}
 
 export default ${name}`
 }
