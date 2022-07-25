@@ -1,18 +1,22 @@
 import fs from 'fs-extra'
 import path from 'path'
+import os from 'os'
 
 export const getProjectsData = () => {
   const rootDir = process.cwd()
-  const nextConfig = path.join(rootDir, 'next.config.js')
   const srcDir = path.join(rootDir, 'src')
   const tsConfig = path.join(rootDir, 'tsconfig.json')
   const fileType = fs.existsSync(tsConfig) ? '.ts' : '.js'
 
-  fs.chmodSync(rootDir, fs.constants.S_IRWXU)
+  const packagePathFile = path.join(rootDir, 'package.json')
+  const packageStringContent = fs.readFileSync(packagePathFile, 'utf-8')
+  const packageJSON = JSON.parse(packageStringContent)
+
+  os.type() !== 'win32' && fs.chmodSync(rootDir, fs.constants.S_IRWXU)
 
   return {
     rootDir,
-    nextConfig,
+    packageJSON,
     fileType,
     srcDir,
   }

@@ -1,18 +1,16 @@
 import fs from 'fs-extra'
 import path from 'path'
 
-const updatePackage = (root: string, fileType: string, command: string) => {
-  const packagePathFile = path.join(root, 'package.json')
-
-  const packageStringContent = fs.existsSync(packagePathFile)
-    ? fs.readFileSync(packagePathFile, 'utf-8')
-    : fs.readFileSync(path.join(root, 'backup/package.json'), 'utf-8')
-
-  const packageParsedContent = JSON.parse(packageStringContent)
-  const { scripts, devDependencies } = packageParsedContent
+const updatePackage = (
+  root: string,
+  fileType: string,
+  command: string,
+  packageJSON: any
+) => {
+  const { scripts, devDependencies } = packageJSON
 
   const packageContent = {
-    ...packageParsedContent,
+    ...packageJSON,
     scripts: {
       ...scripts,
       ...(fileType === '.ts' && { 'check-types': 'tsc --pretty --noEmit' }),
