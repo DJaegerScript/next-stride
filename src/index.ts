@@ -8,7 +8,7 @@ import { version } from '../package.json'
 import striveInit from './initialization'
 import striveGenerate from './generate'
 
-const main = (argv: string[]) => {
+const main = () => {
   const program = new Command()
   try {
     program
@@ -25,10 +25,10 @@ const main = (argv: string[]) => {
     program.showHelpAfterError().parse()
   } catch (error: any) {
     console.error(
-      kleur.bold().bgRed().yellow('ERROR'),
+      kleur.bold().bgRed().white('ERROR'),
       kleur.bold().red(error.message)
     )
   }
 }
 
-main(process.argv)
+main()
