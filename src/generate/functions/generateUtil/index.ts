@@ -1,10 +1,11 @@
+import { Commons } from './../constants'
 import fs from 'fs-extra'
 import path from 'path'
 import generateUtilContent from './generateUtilContent'
 
 import { appendIndex, createComplementaryFile } from '../../../helper'
 
-const generateUtil = (components: string, name: string, fileType: string) => {
+const generateUtil = ({ components, fileType, name }: Commons) => {
   const utilDir = path.join(components, 'utils')
   const dirName = path.join(utilDir, name)
 

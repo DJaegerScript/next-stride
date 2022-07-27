@@ -1,55 +1,47 @@
 import path from 'path'
 import fs from 'fs-extra'
-import generateModulePageContent from './generateModulePageContent'
-import generatePageFile from './generatePageFile'
 import { capitalize, createComplementaryFile } from '../../../helper'
-import generateSSRFile from './generateSSRFile'
 import generateModuleFile from './generateModuleFile'
+import generateSSR from '../generateSSR'
+import { Commons } from '../constants'
+import generatePage from './generatePage'
 
 interface Options {
   P: string
   ssr: boolean
+  page: boolean
 }
 
-const generateModule = (
-  components: string,
-  name: string,
-  fileType: string,
-  options: any
-) => {
-  const moduleDir = path.join(components, 'modules')
-  const moduleName = `${capitalize(name)}Module`
+export interface PageProps {
+  pagePath: string
+  moduleName: string
+  SSRName: string | null
+}
+
+const generateModule = (commons: Commons, options: any) => {
+  const moduleDir = path.join(commons.components, 'modules')
+  const moduleName = `${capitalize(commons.name)}Module`
   const dirName = path.join(moduleDir, moduleName)
 
-  const { P: pagePath, ssr: isSSR } = options as Options
-  const pageDir = path.join(components, '../pages', pagePath)
-  const pageName = path.parse(pagePath).base
+  const { P: pagePath, ssr: isSSR, page } = options as Options
 
-  if (fs.existsSync(pageDir)) {
-    throw new Error('Page already exists')
-  } else if (!fs.existsSync(path.parse(pageDir).dir)) {
-    throw new Error('Parent folder does not exist')
-  } else if (fs.existsSync(dirName)) {
+  isSSR && generateSSR(commons)
+
+  const pageProps: PageProps = {
+    pagePath,
+    moduleName,
+    SSRName: isSSR ? `get${capitalize(commons.name)}Props` : null,
+  }
+
+  page && generatePage(commons, pageProps)
+
+  if (fs.existsSync(dirName)) {
     throw new Error('Module already exists')
   }
 
-  const SSRName = `get${capitalize(name)}Props`
-  const SSRDir = path.join(components, 'ssr')
-  isSSR && generateSSRFile(SSRName, SSRDir, fileType)
+  generateModuleFile(dirName, moduleName, moduleDir, commons.fileType, isSSR)
 
-  const modulePageContent = generateModulePageContent(
-    capitalize(pageName),
-    moduleName,
-    isSSR,
-    SSRName,
-    fileType
-  )
-
-  generatePageFile(pageDir, fileType, modulePageContent)
-
-  generateModuleFile(dirName, moduleName, moduleDir, fileType, isSSR)
-
-  createComplementaryFile(dirName, fileType)
+  createComplementaryFile(dirName, commons.fileType)
 }
 
 export default generateModule

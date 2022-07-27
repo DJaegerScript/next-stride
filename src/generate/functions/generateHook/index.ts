@@ -1,3 +1,4 @@
+import { Commons } from './../constants'
 import fs from 'fs-extra'
 import path from 'path'
 import generateHookContent from './generateHookContent'
@@ -7,7 +8,7 @@ import {
   createComplementaryFile,
 } from '../../../helper'
 
-const generateHook = (components: string, name: string, fileType: string) => {
+const generateHook = ({ components, fileType, name }: Commons) => {
   const hookDir = path.join(components, 'hooks')
   const fileName = `use${capitalize(name)}`
   const dirName = path.join(hookDir, fileName)

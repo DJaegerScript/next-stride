@@ -1,13 +1,10 @@
+import { Commons } from './../constants'
 import fs from 'fs-extra'
 import path from 'path'
 import generateElementContent from './generateElementContent'
 import { appendIndex, createComplementaryFile } from '../../../helper'
 
-const generateElement = (
-  components: string,
-  name: string,
-  fileType: string
-) => {
+const generateElement = ({ components, fileType, name }: Commons) => {
   const elementDir = path.join(components, 'elements')
   const dirName = path.join(elementDir, name)
 

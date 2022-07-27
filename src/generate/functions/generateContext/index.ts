@@ -1,13 +1,10 @@
+import { Commons } from './../constants'
 import fs from 'fs-extra'
 import path from 'path'
 import generateContextContent from './generateContextContent'
 import { appendIndex, createComplementaryFile } from '../../../helper'
 
-const generateContext = (
-  components: string,
-  name: string,
-  fileType: string
-) => {
+const generateContext = ({ components, fileType, name }: Commons) => {
   const contextDir = path.join(components, 'contexts')
   const fileName = `${name}Context`
   const dirName = path.join(contextDir, fileName)

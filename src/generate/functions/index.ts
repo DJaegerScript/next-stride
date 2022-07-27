@@ -19,9 +19,13 @@ const generateFunction = (
 ) => {
   const { fileType, srcDir } = getProjectsData()
 
-  const componentsDir = path.join(srcDir, 'components')
+  const commons = {
+    name,
+    fileType,
+    components: path.join(srcDir, 'components'),
+  }
 
-  schematics[schematic](componentsDir, name, fileType, options)
+  schematics[schematic](commons, options)
 
   execSync('npm run format')
 }
