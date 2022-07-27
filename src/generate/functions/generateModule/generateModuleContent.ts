@@ -4,7 +4,7 @@ const generateModuleContent = (
   fileType: string
 ) => {
   return `import React from 'react'\n
-  ${fileType === '.ts' ? '// TODO: Declare module props interface' : ''} 
+  ${fileType === '.ts' ? '// TODO: Declare interface of module props' : ''} 
 export const ${name}${fileType === '.ts' ? ': interface' : ''} = (${
     isSSR ? 'props' : ''
   }) => {\n
