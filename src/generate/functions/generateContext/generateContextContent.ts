@@ -4,7 +4,7 @@ const generateContextContent = (name: string, fileType: string) => {
   const contextName = `${capitalize(name)}Context`
   return `import React, { createContext, useContext } from 'react'\n
   const ${contextName} = createContext({} ${
-    fileType === '.ts' ? 'as <interface>' : ''
+    fileType === '.ts' ? 'as interface' : ''
   }) ${fileType === '.ts' ? '// TODO: Declare contextValue interface' : ''}\n
 export const use${contextName} = () => useContext(${contextName})\n
 export const ${contextName}Provider${
