@@ -2,6 +2,7 @@ import generateContext from './generateContext'
 import generateElement from './generateElement'
 import generateHook from './generateHook'
 import generateModule from './generateModule'
+import generateSSR from './generateSSR'
 import generateUtil from './generateUtil'
 
 export interface Commons {
@@ -20,4 +21,5 @@ export const schematics: SchematicFunction = {
   util: generateUtil,
   hook: generateHook,
   module: generateModule,
+  ssr: generateSSR,
 }
