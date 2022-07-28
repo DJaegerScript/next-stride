@@ -35,7 +35,7 @@ export const capitalize = (text: string) => {
 export const createComplementaryFile = (dir: string, fileType: string) => {
   fs.writeFileSync(
     path.join(dir, `constant${fileType}`),
-    'export const var = ""',
+    'export const varName = ""',
     {
       flag: 'w',
     }
