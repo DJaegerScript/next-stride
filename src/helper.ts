@@ -12,7 +12,7 @@ export const getProjectsData = () => {
   const packageStringContent = fs.readFileSync(packagePathFile, 'utf-8')
   const packageJSON = JSON.parse(packageStringContent)
 
-  os.type() !== 'win32' && fs.chmodSync(rootDir, fs.constants.S_IRWXU)
+  os.type() !== 'Windows_NT' && fs.chmodSync(rootDir, fs.constants.S_IRWXU)
 
   return {
     rootDir,
