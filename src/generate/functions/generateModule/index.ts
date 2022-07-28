@@ -27,6 +27,10 @@ const generateModule = (commons: Commons, options: any) => {
 
   isSSR && generateSSR(commons)
 
+  if (fs.existsSync(dirName)) {
+    throw new Error('Module already exists')
+  }
+
   const pageProps: PageProps = {
     pagePath,
     moduleName,
@@ -34,10 +38,6 @@ const generateModule = (commons: Commons, options: any) => {
   }
 
   page && generatePage(commons, pageProps)
-
-  if (fs.existsSync(dirName)) {
-    throw new Error('Module already exists')
-  }
 
   generateModuleFile(dirName, moduleName, moduleDir, commons.fileType, isSSR)
 

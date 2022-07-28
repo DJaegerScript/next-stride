@@ -1,3 +1,4 @@
+import { capitalize } from './../../../helper'
 import { Commons } from './../constants'
 import fs from 'fs-extra'
 import path from 'path'
@@ -14,7 +15,7 @@ const generateElement = ({ components, fileType, name }: Commons) => {
 
   fs.writeFileSync(
     path.join(dirName, `index${fileType}x`),
-    generateElementContent(name, fileType),
+    generateElementContent(capitalize(name), fileType),
     {
       flag: 'w',
     }

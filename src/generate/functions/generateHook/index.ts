@@ -19,7 +19,7 @@ const generateHook = ({ components, fileType, name }: Commons) => {
 
   fs.writeFileSync(
     path.join(dirName, `index${fileType}`),
-    generateHookContent(name),
+    generateHookContent(fileName),
     {
       flag: 'w',
     }

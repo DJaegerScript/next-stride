@@ -2,10 +2,13 @@ import { capitalize } from '../../../helper'
 
 const generateContextContent = (name: string, fileType: string) => {
   const contextName = `${capitalize(name)}Context`
-  return `import React, { createContext, useContext } from 'react'\n
+  return `import React, { createContext, useContext } from 'react'
+  ${fileType === '.ts' ? `import {props} from './interface'` : ''}\n
   const ${contextName} = createContext({} ${
-    fileType === '.ts' ? 'as interface' : ''
-  }) ${fileType === '.ts' ? '// TODO: Declare contextValue interface' : ''}\n
+    fileType === '.ts' ? 'as props' : ''
+  }) ${
+    fileType === '.ts' ? '// TODO: Declare interface of contextValue ' : ''
+  }\n
 export const use${contextName} = () => useContext(${contextName})\n
 export const ${contextName}Provider${
     fileType === '.ts' ? ': React.FC' : ''
