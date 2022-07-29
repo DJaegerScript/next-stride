@@ -1,16 +1,18 @@
+import { execSync } from 'child_process'
 import fs from 'fs-extra'
 import kleur from 'kleur'
 import path from 'path'
+import { PackageManager } from '..'
 
 const updatePackage = (
   root: string,
   fileType: string,
-  command: string,
+  { name, command }: PackageManager,
   packageJSON: any
 ) => {
   console.log('🆙', kleur.blue('Installing package...'))
 
-  const { scripts, devDependencies } = packageJSON
+  const { scripts } = packageJSON
 
   const packageContent = {
     ...packageJSON,
@@ -25,25 +27,24 @@ const updatePackage = (
       }`,
       prepare: 'husky install',
     },
-    devDependencies: {
-      ...devDependencies,
-      ...(fileType === '.ts' && {
-        '@typescript-eslint/eslint-plugin': '^5.20.0',
-        '@typescript-eslint/parser': '^5.20.0',
-      }),
-      'eslint-config-google': '^0.14.0',
-      'eslint-config-prettier': '^8.5.0',
-      'eslint-plugin-react': '^7.29.4',
-      '@tsconfig/next': '^1.0.2',
-      prettier: '^2.6.2',
-      husky: '^7.0.0',
-    },
   }
 
   fs.writeFileSync(
     path.join(root, 'package.json'),
     JSON.stringify(packageContent),
     { flag: 'w' }
+  )
+
+  const additionalDependencies =
+    'eslint-config-google eslint-config-prettier eslint-plugin-react'
+
+  const tsDependencies =
+    '@typescript-eslint/eslint-plugin @typescript-eslint/parser @tsconfig/next'
+
+  execSync(
+    `${name === 'npm' ? 'npm i' : `${name} add`} ${additionalDependencies} ${
+      fileType === '.ts' ? tsDependencies : ''
+    }`
   )
 }
 

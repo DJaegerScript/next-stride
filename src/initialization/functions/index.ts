@@ -13,6 +13,11 @@ import generateNextConfig from './generateNextConfig'
 import generateHusky from './generateHusky'
 import kleur from 'kleur'
 
+export interface PackageManager {
+  name: string
+  command: string
+}
+
 const initFunction = () => {
   console.log('⏩', kleur.blue('Initializing stride...'))
 
@@ -24,7 +29,7 @@ const initFunction = () => {
     ? YarnLockFile
     : NPMLockFile
 
-  const packageManager = {
+  const packageManager: PackageManager = {
     name:
       lockFile === PNPMLockFile
         ? 'pnpm'
@@ -48,7 +53,7 @@ const initFunction = () => {
   generateComponents(srcDir, fileType)
   generateLinter(rootDir, fileType, lockFile)
   generateConfig(rootDir, fileType)
-  updatePackage(rootDir, fileType, packageManager.command, packageJSON)
+  updatePackage(rootDir, fileType, packageManager, packageJSON)
   generateHusky(rootDir, packageManager)
 
   console.log('🧐', kleur.blue('Running linter and type checking...'))
