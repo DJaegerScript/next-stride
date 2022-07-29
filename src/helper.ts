@@ -2,14 +2,18 @@ import fs from 'fs-extra'
 import path from 'path'
 import os from 'os'
 import kleur from 'kleur'
+import { execSync } from 'child_process'
 
 export const getProjectsData = () => {
-  console.log('📂', kleur.blue('Gathering project data...'))
-
   const rootDir = process.cwd()
   const srcDir = path.join(rootDir, 'src')
   const tsConfig = path.join(rootDir, 'tsconfig.json')
   const fileType = fs.existsSync(tsConfig) ? '.ts' : '.js'
+
+  !fs.existsSync(path.join(rootDir, '.git')) &&
+    execSync('git init && git branch -m main')
+
+  console.log('\n📂', kleur.blue('Gathering project data...'))
 
   const packagePathFile = path.join(rootDir, 'package.json')
   const packageStringContent = fs.readFileSync(packagePathFile, 'utf-8')
