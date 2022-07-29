@@ -5,7 +5,7 @@ import { eslintConfig, prettierConfig } from './constants'
 import { parseLinterIgnoredFiles } from './parseLinterIgnoredFiles'
 
 const generateLinter = (root: string, fileType: string, lockFile: string) => {
-  console.log('🧑‍⚖️', kleur.blue('Organizing linter rules...'))
+  console.log('🔨', kleur.blue('Organizing linter rules...'))
 
   const parsedLinterIgnoredFiles = parseLinterIgnoredFiles(fileType, lockFile)
 
