@@ -10,6 +10,7 @@ import updatePackage from './updatePackage'
 import generateConfig from './generateConfig'
 import { getProjectsData } from '../../helper'
 import generateNextConfig from './generateNextConfig'
+import generateHusky from './generateHusky'
 
 const initFunction = () => {
   const { fileType, packageJSON, rootDir, srcDir } = getProjectsData()
@@ -44,10 +45,9 @@ const initFunction = () => {
   generateLinter(rootDir, fileType, lockFile)
   generateConfig(rootDir, fileType)
   updatePackage(rootDir, fileType, packageManager.command, packageJSON)
+  generateHusky(rootDir, packageManager)
 
-  execSync(
-    `${packageManager.name} install && npx husky install && npx husky add .husky/pre-commit '${packageManager.command} test-all' && ${packageManager.command} test-all`
-  )
+  execSync(`${packageManager.command} test-all`)
 }
 
 export default initFunction
