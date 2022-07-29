@@ -12,6 +12,7 @@ import { getProjectsData } from '../../helper'
 import generateNextConfig from './generateNextConfig'
 import generateHusky from './generateHusky'
 import kleur from 'kleur'
+import figlet from 'figlet'
 
 export interface PackageManager {
   name: string
@@ -19,7 +20,7 @@ export interface PackageManager {
 }
 
 const initFunction = () => {
-  console.log('⏩', kleur.blue('Initializing stride...'))
+  console.log('\n', kleur.blue(figlet.textSync('Stride')))
 
   const { fileType, packageJSON, rootDir, srcDir } = getProjectsData()
 
@@ -59,7 +60,7 @@ const initFunction = () => {
   console.log('🧐', kleur.blue('Running linter and type checking...'))
   execSync(`${packageManager.command} test-all`)
 
-  console.log('✅', kleur.blue('Stride init successfully'))
+  console.log('\n✅', kleur.blue('Stride init successfully'))
 }
 
 export default initFunction
