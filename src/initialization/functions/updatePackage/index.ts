@@ -36,7 +36,7 @@ const updatePackage = (
   )
 
   const additionalDependencies =
-    'eslint-config-google eslint-config-prettier eslint-plugin-react'
+    'eslint-config-google eslint-config-prettier eslint-plugin-react prettier husky'
 
   const tsDependencies =
     '@typescript-eslint/eslint-plugin @typescript-eslint/parser @tsconfig/next'
