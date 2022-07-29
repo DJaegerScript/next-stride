@@ -1,8 +1,11 @@
 import fs from 'fs-extra'
 import path from 'path'
 import os from 'os'
+import kleur from 'kleur'
 
 export const getProjectsData = () => {
+  console.log('📂', kleur.blue('Gathering project data...'))
+
   const rootDir = process.cwd()
   const srcDir = path.join(rootDir, 'src')
   const tsConfig = path.join(rootDir, 'tsconfig.json')

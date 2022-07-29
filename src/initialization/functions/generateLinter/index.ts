@@ -1,9 +1,12 @@
 import fs from 'fs-extra'
+import kleur from 'kleur'
 import path from 'path'
 import { eslintConfig, prettierConfig } from './constants'
 import { parseLinterIgnoredFiles } from './parseLinterIgnoredFiles'
 
 const generateLinter = (root: string, fileType: string, lockFile: string) => {
+  console.log('🧑‍⚖️', kleur.blue('Organizing linter rules...'))
+
   const parsedLinterIgnoredFiles = parseLinterIgnoredFiles(fileType, lockFile)
 
   fs.writeFileSync(

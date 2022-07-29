@@ -11,8 +11,11 @@ import generateConfig from './generateConfig'
 import { getProjectsData } from '../../helper'
 import generateNextConfig from './generateNextConfig'
 import generateHusky from './generateHusky'
+import kleur from 'kleur'
 
 const initFunction = () => {
+  console.log('⏩', kleur.blue('Initializing stride...'))
+
   const { fileType, packageJSON, rootDir, srcDir } = getProjectsData()
 
   const lockFile = fs.existsSync(path.join(rootDir, PNPMLockFile))
@@ -37,9 +40,10 @@ const initFunction = () => {
   }
 
   if (!packageJSON.dependencies.next)
-    throw new Error('Strive init failed, project is not a next app')
+    throw new Error('Stride init failed, project is not a next app')
 
-  !fs.existsSync(path.join(rootDir, 'next.config.js')) && generateNextConfig
+  !fs.existsSync(path.join(rootDir, 'next.config.js')) &&
+    generateNextConfig(rootDir)
   moveFiles(srcDir)
   generateComponents(srcDir, fileType)
   generateLinter(rootDir, fileType, lockFile)
@@ -47,7 +51,10 @@ const initFunction = () => {
   updatePackage(rootDir, fileType, packageManager.command, packageJSON)
   generateHusky(rootDir, packageManager)
 
+  console.log('🧐', kleur.blue('Running linter and type checking...'))
   execSync(`${packageManager.command} test-all`)
+
+  console.log('✅', kleur.blue('Stride init successfully'))
 }
 
 export default initFunction

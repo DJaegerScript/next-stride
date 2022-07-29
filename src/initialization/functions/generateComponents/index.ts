@@ -1,9 +1,12 @@
 import fs from 'fs-extra'
+import kleur from 'kleur'
 import path from 'path'
 import { directories } from './constants'
 import generateIndexContent from './generateIndexContent'
 
 const generateComponents = (src: string, fileType: string) => {
+  console.log('🧱', kleur.blue('Structuring components...'))
+
   const componentsDir = path.join(src, 'components')
 
   fs.mkdirSync(componentsDir)

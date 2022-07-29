@@ -1,5 +1,6 @@
 import { execSync } from 'child_process'
 import fs from 'fs-extra'
+import kleur from 'kleur'
 import path from 'path'
 
 interface PackageManager {
@@ -8,6 +9,8 @@ interface PackageManager {
 }
 
 const generateHusky = (root: string, { name, command }: PackageManager) => {
+  console.log('🐶', kleur.blue('Registering pre-commit...'))
+
   const initScript =
     name === 'npm' || name === 'yarn'
       ? 'npx husky-init'

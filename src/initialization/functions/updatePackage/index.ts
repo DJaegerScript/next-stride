@@ -1,4 +1,5 @@
 import fs from 'fs-extra'
+import kleur from 'kleur'
 import path from 'path'
 
 const updatePackage = (
@@ -7,6 +8,8 @@ const updatePackage = (
   command: string,
   packageJSON: any
 ) => {
+  console.log('🆙', kleur.blue('Installing package...'))
+
   const { scripts, devDependencies } = packageJSON
 
   const packageContent = {

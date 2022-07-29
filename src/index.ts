@@ -24,10 +24,7 @@ const main = () => {
 
     program.showHelpAfterError().parse()
   } catch (error: any) {
-    console.error(
-      kleur.bold().bgRed().white('ERROR'),
-      kleur.bold().red(error.message)
-    )
+    console.error('❌', kleur.bold().red(error.message))
   }
 }
 
