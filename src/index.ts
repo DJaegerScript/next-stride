@@ -14,9 +14,7 @@ const main = () => {
     program
       .name('stride')
       .usage('<command>')
-      .description(
-        'CLI to generate well-structured next.js folder architecture'
-      )
+      .description('CLI tools for Next JS App 🚀')
       .version(`next-stride@${version}`, '-v, --version')
 
     strideInit(program)

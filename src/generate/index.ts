@@ -9,7 +9,7 @@ const strideGenerate = (program: Command) =>
   program
     .command('generate [schematic] [name]')
     .alias('g')
-    .description('Generate specified schematics')
+    .description('Generate specified stride schematics')
     .option(
       '--pages, -p <pages>',
       'specify pages to be generated, used along module schematic'
