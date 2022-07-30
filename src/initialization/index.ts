@@ -1,10 +1,10 @@
 import { Command } from 'commander'
 import initFunction from './functions'
 
-const striveInit = (program: Command) =>
+const strideInit = (program: Command) =>
   program
     .command('init')
-    .description('Initialize strive scaffolding')
+    .description('Initialize stride scaffolding')
     .action(() => initFunction())
 
-export default striveInit
+export default strideInit

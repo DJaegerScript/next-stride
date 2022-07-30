@@ -5,22 +5,22 @@ import { Command } from 'commander'
 
 // @ts-ignore
 import { version } from '../package.json'
-import striveInit from './initialization'
-import striveGenerate from './generate'
+import strideInit from './initialization'
+import strideGenerate from './generate'
 
 const main = () => {
   const program = new Command()
   try {
     program
-      .name('strive')
+      .name('stride')
       .usage('<command>')
       .description(
         'CLI to generate well-structured next.js folder architecture'
       )
-      .version(`next-strive@${version}`, '-v, --version')
+      .version(`next-stride@${version}`, '-v, --version')
 
-    striveInit(program)
-    striveGenerate(program)
+    strideInit(program)
+    strideGenerate(program)
 
     program.showHelpAfterError().parse()
   } catch (error: any) {

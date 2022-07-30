@@ -5,7 +5,7 @@ export interface GenerateOptions {
   P: string
 }
 
-const striveGenerate = (program: Command) =>
+const strideGenerate = (program: Command) =>
   program
     .command('generate [schematic] [name]')
     .alias('g')
@@ -20,4 +20,4 @@ const striveGenerate = (program: Command) =>
       generateFunction(schematic, name.toLowerCase(), options)
     )
 
-export default striveGenerate
+export default strideGenerate
