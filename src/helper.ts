@@ -30,13 +30,13 @@ export const getProjectsData = () => {
 }
 
 export const capitalize = (text: string) => {
-  const words = text.split(' ')
+  const words = text.split('-')
 
   const capitalizeWords = words.map(
     (word) => word[0].toUpperCase() + word.substring(1)
   )
 
-  return capitalizeWords.join(' ')
+  return capitalizeWords.join('')
 }
 
 export const createComplementaryFile = (dir: string, fileType: string) => {
