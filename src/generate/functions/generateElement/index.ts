@@ -5,18 +5,27 @@ import path from 'path'
 import generateElementContent from './generateElementContent'
 import { appendIndex, createComplementaryFile } from '../../../helper'
 
-const generateElement = ({ components, fileType, name }: Commons) => {
+interface Options {
+  as: string
+}
+
+const generateElement = (
+  { components, fileType, name }: Commons,
+  options: any
+) => {
+  const { as: alias } = options as Options
+
   const elementName = capitalize(name)
   const elementDir = path.join(components, 'elements')
   const dirName = path.join(elementDir, elementName)
 
   fs.mkdirSync(dirName)
 
-  appendIndex(elementName, path.join(elementDir, `index${fileType}`))
+  appendIndex(elementName, path.join(elementDir, `index${fileType}`), alias)
 
   fs.writeFileSync(
     path.join(dirName, `index${fileType}x`),
-    generateElementContent(elementName, fileType),
+    generateElementContent(elementName, fileType, alias),
     {
       flag: 'w',
     }

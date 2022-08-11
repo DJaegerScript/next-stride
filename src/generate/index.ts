@@ -16,6 +16,7 @@ const strideGenerate = (program: Command) =>
     )
     .option('--ssr', 'generate ssr function for module schematics')
     .option('--no-page', 'prevent module schematics to generate pages')
+    .option('--as <alias>', 'generate schematics with aliases')
     .action((schematic: Schematic, name: string, options: GenerateOptions) =>
       generateFunction(schematic, name.toLowerCase(), options)
     )
