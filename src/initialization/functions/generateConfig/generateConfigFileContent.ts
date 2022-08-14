@@ -18,6 +18,7 @@ const generateConfigFileContent = (fileType: string) => ({
     }),
     baseUrl: '.',
     paths: {
+      '@icons': ['src/components/icons'],
       '@contexts': ['src/components/contexts'],
       '@elements': ['src/components/elements'],
       '@hooks': ['src/components/hooks'],

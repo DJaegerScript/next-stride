@@ -12,9 +12,24 @@ const generateComponents = (src: string, fileType: string) => {
   fs.mkdirSync(componentsDir)
 
   directories.map((directory) => {
-    fs.mkdirSync(path.join(componentsDir, directory))
+    const componentDir = path.join(componentsDir, directory)
+
+    fs.mkdirSync(componentDir)
+
+    directory == 'icons' && fileType === '.ts'
+      ? fs.writeFileSync(
+          path.join(componentDir, `interface${fileType}`),
+          `export interface IconProps {
+            size: string
+            fill?: string
+            stroke?: string
+            className?: string
+          }`
+        )
+      : ''
+
     fs.writeFileSync(
-      path.join(componentsDir, `${directory}/index${fileType}`),
+      path.join(componentDir, `index${fileType}`),
       "export * from './'"
     )
   })

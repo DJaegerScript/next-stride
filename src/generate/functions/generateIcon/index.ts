@@ -1,31 +1,19 @@
 import path from 'path'
 import fs from 'fs-extra'
-import {
-  appendIndex,
-  capitalize,
-  createComplementaryFile,
-} from '../../../helper'
+import { appendIndex, capitalize } from '../../../helper'
 import { Commons } from '../constants'
 import generateIconContent from './generateIconContent'
 
 const generateIcon = ({ components, fileType, name }: Commons) => {
   const iconDir = path.join(components, 'icons')
-  const fileName = capitalize(name)
-  const dirName = path.join(iconDir, fileName)
+  const iconName = capitalize(name)
+  const fileName = path.join(iconDir, `${iconName}${fileType}x`)
 
-  fs.mkdirSync(dirName)
+  appendIndex(iconName, path.join(iconDir, `index${fileType}`))
 
-  appendIndex(fileName, path.join(iconDir, `index${fileType}`))
-
-  fs.writeFileSync(
-    path.join(dirName, `index${fileType}x`),
-    generateIconContent(fileName, fileType),
-    {
-      flag: 'w',
-    }
-  )
-
-  createComplementaryFile(dirName, fileType, true)
+  fs.writeFileSync(fileName, generateIconContent(iconName, fileType), {
+    flag: 'w',
+  })
 }
 
 export default generateIcon

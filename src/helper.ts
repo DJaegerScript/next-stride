@@ -53,19 +53,14 @@ export const createComplementaryFile = (
       }
     )
 
-  const interfaceIcon = isIcon
-    ? `export interface IconProps {
-        size: string
-        fill?: string
-        stroke?: string
-        className?: string
-      }`
-    : 'export interface props {}'
-
   fileType === '.ts' &&
-    fs.writeFileSync(path.join(dir, `interface.ts`), interfaceIcon, {
-      flag: 'w',
-    })
+    fs.writeFileSync(
+      path.join(dir, `interface.ts`),
+      'export interface props {}',
+      {
+        flag: 'w',
+      }
+    )
 }
 
 export const appendIndex = (component: string, dir: string, alias?: string) => {
