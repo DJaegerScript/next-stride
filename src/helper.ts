@@ -39,7 +39,11 @@ export const capitalize = (text: string) => {
   return capitalizeWords.join('')
 }
 
-export const createComplementaryFile = (dir: string, fileType: string) => {
+export const createComplementaryFile = (
+  dir: string,
+  fileType: string,
+  isIcon?: boolean
+) => {
   fs.writeFileSync(
     path.join(dir, `constant${fileType}`),
     'export const varName = ""',
@@ -47,14 +51,20 @@ export const createComplementaryFile = (dir: string, fileType: string) => {
       flag: 'w',
     }
   )
+
+  const interfaceIcon = isIcon
+    ? `export interface IconProps {
+        size: string
+        fill?: string
+        stroke?: string
+        className?: string
+      }`
+    : 'export interface props {}'
+
   fileType === '.ts' &&
-    fs.writeFileSync(
-      path.join(dir, `interface.ts`),
-      'export interface props {}',
-      {
-        flag: 'w',
-      }
-    )
+    fs.writeFileSync(path.join(dir, `interface.ts`), interfaceIcon, {
+      flag: 'w',
+    })
 }
 
 export const appendIndex = (component: string, dir: string, alias?: string) => {

@@ -1,6 +1,7 @@
 import generateContext from './generateContext'
 import generateElement from './generateElement'
 import generateHook from './generateHook'
+import generateIcon from './generateIcon'
 import generateModule from './generateModule'
 import generateSSR from './generateSSR'
 import generateUtil from './generateUtil'
@@ -22,4 +23,5 @@ export const schematics: SchematicFunction = {
   hook: generateHook,
   module: generateModule,
   ssr: generateSSR,
+  icon: generateIcon,
 }

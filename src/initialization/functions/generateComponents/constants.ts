@@ -5,4 +5,5 @@ export const directories: string[] = [
   'modules',
   'ssr',
   'utils',
+  'icons',
 ]
