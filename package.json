@@ -9,7 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\"",
     "build": "rm -rf lib && tsc -p .",
-    "publish": "npm run test-all && npm run build && np",
+    "release": "npm run test-all && npm run build && np",
     "local": "npm run build && npm link",
     "check-types": "tsc --pretty --noEmit",
     "check-format": "prettier --check .",
