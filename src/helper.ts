@@ -44,13 +44,14 @@ export const createComplementaryFile = (
   fileType: string,
   isIcon?: boolean
 ) => {
-  fs.writeFileSync(
-    path.join(dir, `constant${fileType}`),
-    'export const varName = ""',
-    {
-      flag: 'w',
-    }
-  )
+  !isIcon &&
+    fs.writeFileSync(
+      path.join(dir, `constant${fileType}`),
+      'export const varName = ""',
+      {
+        flag: 'w',
+      }
+    )
 
   const interfaceIcon = isIcon
     ? `export interface IconProps {

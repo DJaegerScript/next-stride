@@ -18,7 +18,7 @@ const generateIcon = ({ components, fileType, name }: Commons) => {
   appendIndex(fileName, path.join(iconDir, `index${fileType}`))
 
   fs.writeFileSync(
-    path.join(dirName, `index${fileType}`),
+    path.join(dirName, `index${fileType}x`),
     generateIconContent(fileName, fileType),
     {
       flag: 'w',
