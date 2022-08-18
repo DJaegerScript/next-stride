@@ -8,7 +8,7 @@ import { appendIndex, createComplementaryFile } from '../../../helper'
 
 const generateUtil = ({ components, fileType, name }: Commons) => {
   const utilDir = path.join(components, 'utils')
-  const fileName = capitalize(name)
+  const fileName = capitalize(name, true)
   const dirName = path.join(utilDir, fileName)
 
   fs.mkdirSync(dirName)
