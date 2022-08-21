@@ -25,7 +25,7 @@ stride --help
 
 ## Project Structure & Schematics
 
-TBA
+[Go to Project Structure & Schematics Documentation](https://github.com/DJaegerScript/next-stride/blob/main/DOCUMENTATION.md)
 
 ## License
 [Next Stride](https://github.com/DJaegerScript/next-stride) is licensed under [MIT License](https://github.com/DJaegerScript/next-stride/blob/main/license)
