@@ -9,7 +9,9 @@ const generateComponents = (src: string, fileType: string) => {
 
   const componentsDir = path.join(src, 'components')
 
-  fs.mkdirSync(componentsDir)
+  if (!fs.existsSync(componentsDir)) {
+    fs.mkdirSync(componentsDir)
+  }
 
   directories.map((directory) => {
     const componentDir = path.join(componentsDir, directory)
