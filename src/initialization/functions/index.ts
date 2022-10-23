@@ -22,7 +22,7 @@ export interface PackageManager {
 const initFunction = () => {
   console.log('\n', kleur.blue(figlet.textSync('Stride')))
 
-  const { fileType, packageJSON, rootDir, srcDir } = getProjectsData()
+  const { fileType, packageJSON, rootDir, srcDir } = getProjectsData(true)
 
   const lockFile = fs.existsSync(path.join(rootDir, PNPMLockFile))
     ? PNPMLockFile

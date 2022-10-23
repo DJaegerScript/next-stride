@@ -4,20 +4,27 @@ import os from 'os'
 import kleur from 'kleur'
 import { execSync } from 'child_process'
 
-export const getProjectsData = () => {
+export const getProjectsData = (isInit?: boolean) => {
+  console.log(
+    '\n📂',
+    kleur.blue(isInit ? 'Gathering project data...' : 'Generating schematic...')
+  )
+
   const rootDir = process.cwd()
   const srcDir = path.join(rootDir, 'src')
   const tsConfig = path.join(rootDir, 'tsconfig.json')
   const fileType = fs.existsSync(tsConfig) ? '.ts' : '.js'
+  let packageJSON: any
 
-  !fs.existsSync(path.join(rootDir, '.git')) &&
-    execSync('git init && git branch -m main')
+  if (isInit) {
+    if (!fs.existsSync(path.join(rootDir, '.git'))) {
+      execSync('git init && git branch -m main')
+    }
 
-  console.log('\n📂', kleur.blue('Gathering project data...'))
-
-  const packagePathFile = path.join(rootDir, 'package.json')
-  const packageStringContent = fs.readFileSync(packagePathFile, 'utf-8')
-  const packageJSON = JSON.parse(packageStringContent)
+    const packagePathFile = path.join(rootDir, 'package.json')
+    const packageStringContent = fs.readFileSync(packagePathFile, 'utf-8')
+    packageJSON = JSON.parse(packageStringContent)
+  }
 
   os.type() !== 'Windows_NT' && fs.chmodSync(rootDir, fs.constants.S_IRWXU)
 
