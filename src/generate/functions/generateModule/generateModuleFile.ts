@@ -1,7 +1,7 @@
 import fs from 'fs-extra'
 import path from 'path'
 import generateModuleContent from './generateModuleContent'
-import { appendIndex } from '../../../helper'
+import { appendIndex } from '../../../helpers'
 
 const generateModuleFile = (
   dirName: string,

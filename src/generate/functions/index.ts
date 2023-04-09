@@ -2,7 +2,7 @@ import { execSync } from 'child_process'
 import path from 'path'
 import { schematics } from './constants'
 import { GenerateOptions } from './../index'
-import { getProjectsData } from '../../helper'
+import { getProjectData } from '../../helpers'
 
 export type Schematic =
   | 'context'
@@ -17,7 +17,7 @@ const generateFunction = (
   name: string,
   options: GenerateOptions
 ) => {
-  const { fileType, srcDir } = getProjectsData()
+  const { fileType, srcDir } = getProjectData()
 
   const commons = {
     name,

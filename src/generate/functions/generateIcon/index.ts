@@ -1,6 +1,6 @@
 import path from 'path'
 import fs from 'fs-extra'
-import { appendIndex, capitalize } from '../../../helper'
+import { appendIndex, capitalize } from '../../../helpers'
 import { Commons } from '../constants'
 import generateIconContent from './generateIconContent'
 

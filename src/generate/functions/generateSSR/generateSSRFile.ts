@@ -1,6 +1,6 @@
 import fs from 'fs-extra'
 import path from 'path'
-import { appendIndex } from '../../../helper'
+import { appendIndex } from '../../../helpers'
 import generateSSRContent from './generateSSRContent'
 
 const generateSSRFile = (SSRName: string, SSRDir: string, fileType: string) => {

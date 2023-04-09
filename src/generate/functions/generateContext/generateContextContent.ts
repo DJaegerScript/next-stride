@@ -1,4 +1,4 @@
-import { capitalize } from '../../../helper'
+import { capitalize } from '../../../helpers'
 
 const generateContextContent = (name: string, fileType: string) => {
   const contextName = `${capitalize(name)}Context`

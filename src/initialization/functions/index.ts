@@ -8,7 +8,7 @@ import generateComponents from './generateComponents'
 import generateLinter from './generateLinter'
 import updatePackage from './updatePackage'
 import generateConfig from './generateConfig'
-import { getProjectsData } from '../../helper'
+import { getProjectData } from '../../helpers'
 import generateNextConfig from './generateNextConfig'
 import generateHusky from './generateHusky'
 import kleur from 'kleur'
@@ -22,7 +22,7 @@ export interface PackageManager {
 const initFunction = () => {
   console.log('\n', kleur.blue(figlet.textSync('Stride')))
 
-  const { fileType, packageJSON, rootDir, srcDir } = getProjectsData(true)
+  const { fileType, packageJSON, rootDir, srcDir } = getProjectData(true)
 
   const lockFile = fs.existsSync(path.join(rootDir, PNPMLockFile))
     ? PNPMLockFile

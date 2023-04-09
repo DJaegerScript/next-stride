@@ -1,7 +1,7 @@
 import { Commons } from './../constants'
-import { createComplementaryFile } from './../../../helper'
+import { createComplementaryFile } from './../../../helpers'
 import path from 'path'
-import { capitalize } from '../../../helper'
+import { capitalize } from '../../../helpers'
 import generateSSRFile from './generateSSRFile'
 
 const generateSSR = ({ components, fileType, name }: Commons) => {

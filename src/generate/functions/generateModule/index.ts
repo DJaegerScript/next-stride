@@ -1,6 +1,6 @@
 import path from 'path'
 import fs from 'fs-extra'
-import { capitalize, createComplementaryFile } from '../../../helper'
+import { capitalize, createComplementaryFile } from '../../../helpers'
 import generateModuleFile from './generateModuleFile'
 import generateSSR from '../generateSSR'
 import { Commons } from '../constants'

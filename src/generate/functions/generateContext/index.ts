@@ -1,9 +1,9 @@
-import { capitalize } from './../../../helper'
+import { capitalize } from './../../../helpers'
 import { Commons } from './../constants'
 import fs from 'fs-extra'
 import path from 'path'
 import generateContextContent from './generateContextContent'
-import { appendIndex, createComplementaryFile } from '../../../helper'
+import { appendIndex, createComplementaryFile } from '../../../helpers'
 
 const generateContext = ({ components, fileType, name }: Commons) => {
   const contextDir = path.join(components, 'contexts')

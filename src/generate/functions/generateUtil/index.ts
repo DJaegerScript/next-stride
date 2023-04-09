@@ -1,10 +1,10 @@
-import { capitalize } from './../../../helper'
+import { capitalize } from './../../../helpers'
 import { Commons } from './../constants'
 import fs from 'fs-extra'
 import path from 'path'
 import generateUtilContent from './generateUtilContent'
 
-import { appendIndex, createComplementaryFile } from '../../../helper'
+import { appendIndex, createComplementaryFile } from '../../../helpers'
 
 const generateUtil = ({ components, fileType, name }: Commons) => {
   const utilDir = path.join(components, 'utils')

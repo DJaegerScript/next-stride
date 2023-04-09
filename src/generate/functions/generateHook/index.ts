@@ -6,7 +6,7 @@ import {
   appendIndex,
   capitalize,
   createComplementaryFile,
-} from '../../../helper'
+} from '../../../helpers'
 
 const generateHook = ({ components, fileType, name }: Commons) => {
   const hookDir = path.join(components, 'hooks')

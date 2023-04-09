@@ -3,7 +3,7 @@ import { Commons } from './../constants'
 import path from 'path'
 import fs from 'fs-extra'
 import generatePageContent from './generatePageContent'
-import { capitalize } from '../../../helper'
+import { capitalize } from '../../../helpers'
 import generatePageFile from './generatePageFile'
 
 const generatePage = (commons: Commons, pageProps: PageProps) => {
