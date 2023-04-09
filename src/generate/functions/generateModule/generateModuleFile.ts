@@ -21,6 +21,26 @@ const generateModuleFile = (
       flag: 'w',
     }
   )
+
+  const sectionDir = path.join(dirName, `sections`)
+  fs.mkdirSync(sectionDir)
+  fs.writeFileSync(
+    path.join(sectionDir, `index${fileType}x`),
+    `export * from './'`,
+    {
+      flag: 'w',
+    }
+  )
+
+  const moduleElementDir = path.join(dirName, `module-elements`)
+  fs.mkdirSync(moduleElementDir)
+  fs.writeFileSync(
+    path.join(moduleElementDir, `index${fileType}x`),
+    `export * from './'`,
+    {
+      flag: 'w',
+    }
+  )
 }
 
 export default generateModuleFile
