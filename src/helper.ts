@@ -6,8 +6,8 @@ import { execSync } from 'child_process'
 
 export const getProjectsData = (isInit?: boolean) => {
   console.log(
-    '\n📂',
-    kleur.blue(isInit ? 'Gathering project data...' : 'Generating schematic...')
+    '\n⏩',
+    kleur.blue(isInit ? 'Initiating Stride...' : 'Generating schematic...')
   )
 
   const rootDir = process.cwd()
