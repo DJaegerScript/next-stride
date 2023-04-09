@@ -4,7 +4,7 @@ import fs from 'fs-extra'
 import path from 'path'
 import generateUtilContent from './generateUtilContent'
 
-import { appendIndex, createComplementaryFile } from '../../../helpers'
+import { registerFile, createComplementaryFile } from '../../../helpers'
 
 const generateUtil = ({ components, fileType, name }: Commons) => {
   const utilDir = path.join(components, 'utils')
@@ -13,7 +13,7 @@ const generateUtil = ({ components, fileType, name }: Commons) => {
 
   fs.mkdirSync(dirName)
 
-  appendIndex(fileName, path.join(utilDir, `index${fileType}`))
+  registerFile(fileName, path.join(utilDir, `index${fileType}`))
 
   fs.writeFileSync(
     path.join(dirName, `index${fileType}`),

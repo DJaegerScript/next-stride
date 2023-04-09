@@ -3,7 +3,7 @@ import fs from 'fs-extra'
 import path from 'path'
 import generateHookContent from './generateHookContent'
 import {
-  appendIndex,
+  registerFile,
   capitalize,
   createComplementaryFile,
 } from '../../../helpers'
@@ -15,7 +15,7 @@ const generateHook = ({ components, fileType, name }: Commons) => {
 
   fs.mkdirSync(dirName)
 
-  appendIndex(fileName, path.join(hookDir, `index${fileType}`))
+  registerFile(fileName, path.join(hookDir, `index${fileType}`))
 
   fs.writeFileSync(
     path.join(dirName, `index${fileType}`),

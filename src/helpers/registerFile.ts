@@ -1,7 +1,11 @@
 import fs from 'fs-extra'
 import { capitalize } from './capitalize'
 
-export const appendIndex = (component: string, dir: string, alias?: string) => {
+export const registerFile = (
+  component: string,
+  dir: string,
+  alias?: string
+) => {
   const indexContent = fs.readFileSync(dir, 'utf-8')
 
   const rawIndexContents = indexContent.split('\n')

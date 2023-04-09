@@ -3,7 +3,7 @@ import { Commons } from './../constants'
 import fs from 'fs-extra'
 import path from 'path'
 import generateElementContent from './generateElementContent'
-import { appendIndex, createComplementaryFile } from '../../../helpers'
+import { registerFile, createComplementaryFile } from '../../../helpers'
 
 interface Options {
   as: string
@@ -21,7 +21,7 @@ const generateElement = (
 
   fs.mkdirSync(dirName)
 
-  appendIndex(elementName, path.join(elementDir, `index${fileType}`), alias)
+  registerFile(elementName, path.join(elementDir, `index${fileType}`), alias)
 
   fs.writeFileSync(
     path.join(dirName, `index${fileType}x`),

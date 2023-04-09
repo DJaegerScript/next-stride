@@ -1,7 +1,7 @@
 import fs from 'fs-extra'
 import path from 'path'
 import generateModuleContent from './generateModuleContent'
-import { appendIndex } from '../../../helpers'
+import { registerFile } from '../../../helpers'
 
 const generateModuleFile = (
   dirName: string,
@@ -12,7 +12,7 @@ const generateModuleFile = (
 ) => {
   fs.mkdirSync(dirName)
 
-  appendIndex(moduleName, path.join(moduleDir, `index${fileType}`))
+  registerFile(moduleName, path.join(moduleDir, `index${fileType}`))
 
   fs.writeFileSync(
     path.join(dirName, `index${fileType}x`),

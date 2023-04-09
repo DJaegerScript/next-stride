@@ -3,7 +3,7 @@ import { Commons } from './../constants'
 import fs from 'fs-extra'
 import path from 'path'
 import generateContextContent from './generateContextContent'
-import { appendIndex, createComplementaryFile } from '../../../helpers'
+import { registerFile, createComplementaryFile } from '../../../helpers'
 
 const generateContext = ({ components, fileType, name }: Commons) => {
   const contextDir = path.join(components, 'contexts')
@@ -12,7 +12,7 @@ const generateContext = ({ components, fileType, name }: Commons) => {
 
   fs.mkdirSync(dirName)
 
-  appendIndex(fileName, path.join(contextDir, `index${fileType}`))
+  registerFile(fileName, path.join(contextDir, `index${fileType}`))
 
   fs.writeFileSync(
     path.join(dirName, `index${fileType}x`),
