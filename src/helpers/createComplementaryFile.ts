@@ -9,7 +9,7 @@ export const createComplementaryFile = (
   !isIcon &&
     fs.writeFileSync(
       path.join(dir, `constant${fileType}`),
-      'export const varName = ""',
+      'export const VAR_NAME = ""',
       {
         flag: 'w',
       }
@@ -18,7 +18,7 @@ export const createComplementaryFile = (
   fileType === '.ts' &&
     fs.writeFileSync(
       path.join(dir, `interface.ts`),
-      'export interface props {}',
+      'export interface Props {}',
       {
         flag: 'w',
       }
