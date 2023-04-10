@@ -26,7 +26,11 @@ export const getProjectData = (isInit?: boolean) => {
     packageJSON = JSON.parse(packageStringContent)
   }
 
-  os.type() !== 'Windows_NT' && fs.chmodSync(rootDir, fs.constants.S_IRWXU)
+  if (os.type() !== 'Windows_NT') {
+    fs.chmodSync(rootDir, fs.constants.S_IRWXU)
+  } else {
+    execSync(`icacls "${rootDir}" /grant Everyone:(F)`)
+  }
 
   return {
     rootDir,
