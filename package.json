@@ -1,6 +1,6 @@
 {
   "name": "next-stride",
-  "version": "2.6.2",
+  "version": "2.6.3",
   "description": "CLI tools for Next JS App 🚀",
   "main": "./lib/index.js",
   "bin": {
