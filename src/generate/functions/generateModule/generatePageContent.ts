@@ -4,7 +4,9 @@ const generatePageContent = (
   SSRName: string | null,
   fileType: string
 ) => {
-  return `import React from 'react'
+  return `'use client'
+  
+import React from 'react'
 import { ${moduleName} } from '@modules'
 ${fileType === '.ts' ? "import type { NextPage } from 'next'" : ''}
 ${SSRName ? `import { ${SSRName} } from '@ssr'` : ''}
