@@ -3,7 +3,7 @@ import path from 'path'
 import { execSync } from 'child_process'
 import fs from 'fs-extra'
 
-import moveFiles from './moveFiles'
+// import moveFiles from './moveFiles'
 import generateComponents from './generateComponents'
 import generateLinter from './generateLinter'
 import updatePackage from './updatePackage'
@@ -50,7 +50,10 @@ const initFunction = () => {
 
   !fs.existsSync(path.join(rootDir, 'next.config.js')) &&
     generateNextConfig(rootDir)
-  moveFiles(srcDir)
+
+  /* Is this necessary for next 13? */
+  // moveFiles(srcDir)
+
   generateComponents(srcDir, fileType)
   generateLinter(rootDir, fileType, lockFile)
   generateConfig(rootDir, fileType)
