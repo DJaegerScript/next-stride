@@ -1,20 +1,19 @@
 import { capitalize } from './../../../helpers'
-import { Commons } from './../constants'
 import fs from 'fs-extra'
 import path from 'path'
 import generateElementContent from './generateElementContent'
 import { registerFile, createComplementaryFile } from '../../../helpers'
-
-interface Options {
-  as: string
-}
+import { CommonInterface, OptionInterface } from '../interface'
 
 const generateElement = (
-  { components, fileType, name }: Commons,
-  options: any
+  { components, fileType, name }: CommonInterface,
+  {
+    as: alias,
+    interface: withInterface,
+    complementary: withComplementary,
+    constant: withConstant,
+  }: OptionInterface
 ) => {
-  const { as: alias } = options as Options
-
   const elementName = capitalize(name)
   const elementDir = path.join(components, 'elements')
   const dirName = path.join(elementDir, elementName)
@@ -31,7 +30,14 @@ const generateElement = (
     }
   )
 
-  createComplementaryFile(dirName, fileType)
+  if (withComplementary) {
+    createComplementaryFile({
+      dir: dirName,
+      fileType,
+      withInterface,
+      withConstant,
+    })
+  }
 }
 
 export default generateElement

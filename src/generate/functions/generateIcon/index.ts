@@ -1,10 +1,10 @@
 import path from 'path'
 import fs from 'fs-extra'
 import { registerFile, capitalize } from '../../../helpers'
-import { Commons } from '../constants'
 import generateIconContent from './generateIconContent'
+import { CommonInterface } from '../interface'
 
-const generateIcon = ({ components, fileType, name }: Commons) => {
+const generateIcon = ({ components, fileType, name }: CommonInterface) => {
   const iconDir = path.join(components, 'icons')
   const iconName = capitalize(name)
   const fileName = path.join(iconDir, `${iconName}${fileType}x`)

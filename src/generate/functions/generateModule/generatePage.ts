@@ -1,12 +1,11 @@
-import { PageProps } from './index'
-import { Commons } from './../constants'
 import path from 'path'
 import fs from 'fs-extra'
 import generatePageContent from './generatePageContent'
 import { capitalize } from '../../../helpers'
 import generatePageFile from './generatePageFile'
+import { CommonInterface, PageProps } from '../interface'
 
-const generatePage = (commons: Commons, pageProps: PageProps) => {
+const generatePage = (commons: CommonInterface, pageProps: PageProps) => {
   const { components, fileType, name } = commons
   const { SSRName, moduleName, pagePath } = pageProps
 

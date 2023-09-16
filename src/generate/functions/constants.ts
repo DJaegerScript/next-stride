@@ -5,16 +5,7 @@ import generateIcon from './generateIcon'
 import generateModule from './generateModule'
 import generateSSR from './generateSSR'
 import generateUtil from './generateUtil'
-
-export interface Commons {
-  components: string
-  name: string
-  fileType: string
-}
-
-interface SchematicFunction {
-  [index: string]: (common: Commons, options?: any) => void
-}
+import { SchematicFunction } from './interface'
 
 export const schematics: SchematicFunction = {
   context: generateContext,

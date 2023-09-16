@@ -1,4 +1,3 @@
-import { Commons } from './../constants'
 import fs from 'fs-extra'
 import path from 'path'
 import generateHookContent from './generateHookContent'
@@ -7,8 +6,16 @@ import {
   capitalize,
   createComplementaryFile,
 } from '../../../helpers'
+import { CommonInterface, OptionInterface } from '../interface'
 
-const generateHook = ({ components, fileType, name }: Commons) => {
+const generateHook = (
+  { components, fileType, name }: CommonInterface,
+  {
+    complementary: withComplementary,
+    constant: withConstant,
+    interface: withInterface,
+  }: OptionInterface
+) => {
   const hookDir = path.join(components, 'hooks')
   const fileName = `use${capitalize(name)}`
   const dirName = path.join(hookDir, fileName)
@@ -25,7 +32,14 @@ const generateHook = ({ components, fileType, name }: Commons) => {
     }
   )
 
-  createComplementaryFile(dirName, fileType)
+  if (withComplementary) {
+    createComplementaryFile({
+      dir: dirName,
+      fileType,
+      withConstant,
+      withInterface,
+    })
+  }
 }
 
 export default generateHook

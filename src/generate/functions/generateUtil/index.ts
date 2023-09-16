@@ -1,12 +1,18 @@
 import { capitalize } from './../../../helpers'
-import { Commons } from './../constants'
 import fs from 'fs-extra'
 import path from 'path'
 import generateUtilContent from './generateUtilContent'
-
 import { registerFile, createComplementaryFile } from '../../../helpers'
+import { CommonInterface, OptionInterface } from '../interface'
 
-const generateUtil = ({ components, fileType, name }: Commons) => {
+const generateUtil = (
+  { components, fileType, name }: CommonInterface,
+  {
+    complementary: withComplementary,
+    interface: withInterface,
+    constant: withConstant,
+  }: OptionInterface
+) => {
   const utilDir = path.join(components, 'utils')
   const fileName = capitalize(name.toLowerCase(), true)
   const dirName = path.join(utilDir, fileName)
@@ -22,8 +28,14 @@ const generateUtil = ({ components, fileType, name }: Commons) => {
       flag: 'w',
     }
   )
-
-  createComplementaryFile(dirName, fileType)
+  if (withComplementary) {
+    createComplementaryFile({
+      dir: dirName,
+      fileType,
+      withConstant,
+      withInterface,
+    })
+  }
 }
 
 export default generateUtil

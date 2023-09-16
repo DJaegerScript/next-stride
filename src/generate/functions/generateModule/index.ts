@@ -3,29 +3,26 @@ import fs from 'fs-extra'
 import { capitalize, createComplementaryFile } from '../../../helpers'
 import generateModuleFile from './generateModuleFile'
 import generateSSR from '../generateSSR'
-import { Commons } from '../constants'
 import generatePage from './generatePage'
+import { CommonInterface, OptionInterface, PageProps } from '../interface'
 
-interface Options {
-  P: string
-  ssr: boolean
-  page: boolean
-}
+const generateModule = (commons: CommonInterface, options: OptionInterface) => {
+  const {
+    P: pagePath,
+    ssr: isSSR,
+    page: withPage,
+    complementary: withComplementary,
+    constant: withConstant,
+    interface: withInterface,
+  } = options
 
-export interface PageProps {
-  pagePath: string
-  moduleName: string
-  SSRName: string | null
-}
-
-const generateModule = (commons: Commons, options: any) => {
   const moduleDir = path.join(commons.components, 'modules')
   const moduleName = `${capitalize(commons.name)}Module`
   const dirName = path.join(moduleDir, moduleName)
 
-  const { P: pagePath, ssr: isSSR, page } = options as Options
-
-  isSSR && generateSSR(commons)
+  if (isSSR) {
+    generateSSR(commons, options)
+  }
 
   if (fs.existsSync(dirName)) {
     throw new Error('Module already exists')
@@ -37,11 +34,20 @@ const generateModule = (commons: Commons, options: any) => {
     SSRName: isSSR ? `get${capitalize(commons.name)}Props` : null,
   }
 
-  page && generatePage(commons, pageProps)
+  if (withPage) {
+    generatePage(commons, pageProps)
+  }
 
   generateModuleFile(dirName, moduleName, moduleDir, commons.fileType, isSSR)
 
-  createComplementaryFile(dirName, commons.fileType)
+  if (withComplementary) {
+    createComplementaryFile({
+      dir: dirName,
+      fileType: commons.fileType,
+      withConstant,
+      withInterface,
+    })
+  }
 }
 
 export default generateModule

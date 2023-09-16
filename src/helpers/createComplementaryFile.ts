@@ -1,13 +1,16 @@
 import path from 'path'
 import fs from 'fs-extra'
+import { CreateComplementaryInterface } from './interface'
 
-export const createComplementaryFile = (
-  dir: string,
-  fileType: string,
-  interfaceContent?: string,
-  isIcon?: boolean
-) => {
-  if (!isIcon) {
+export const createComplementaryFile = ({
+  dir,
+  fileType,
+  withInterface = true,
+  withConstant = true,
+  interfaceContent,
+  isIcon,
+}: CreateComplementaryInterface) => {
+  if (withConstant && !isIcon) {
     fs.writeFileSync(
       path.join(dir, `constant${fileType}`),
       'export const VAR_NAME = ""',
@@ -17,7 +20,7 @@ export const createComplementaryFile = (
     )
   }
 
-  if (fileType === '.ts') {
+  if (withInterface && fileType === '.ts') {
     const content = interfaceContent || 'export interface Props {}'
 
     fs.writeFileSync(path.join(dir, `interface.ts`), content, {

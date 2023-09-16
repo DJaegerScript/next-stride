@@ -1,11 +1,14 @@
 import { capitalize } from './../../../helpers'
-import { Commons } from './../constants'
 import fs from 'fs-extra'
 import path from 'path'
 import generateContextContent from './generateContextContent'
 import { registerFile, createComplementaryFile } from '../../../helpers'
+import { CommonInterface, OptionInterface } from '../interface'
 
-const generateContext = ({ components, fileType, name }: Commons) => {
+const generateContext = (
+  { components, fileType, name }: CommonInterface,
+  { constant: withConstant }: OptionInterface
+) => {
   const contextDir = path.join(components, 'contexts')
   const fileName = `${capitalize(name)}Context`
   const dirName = path.join(contextDir, fileName)
@@ -24,14 +27,19 @@ const generateContext = ({ components, fileType, name }: Commons) => {
     }
   )
 
-  const interfaceContents = `import { ReactNode } from 'react'\n
+  const interfaceContent = `import { ReactNode } from 'react'\n
   
-export interface ${contextName}ProviderProps {
+  export interface ${contextName}ProviderProps {
     children: ReactNode
   }\n
   export interface ${contextName}Interface {}`
 
-  createComplementaryFile(dirName, fileType, interfaceContents)
+  createComplementaryFile({
+    dir: dirName,
+    fileType,
+    interfaceContent,
+    withConstant,
+  })
 }
 
 export default generateContext

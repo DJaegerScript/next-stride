@@ -1,16 +1,30 @@
-import { Commons } from './../constants'
 import { createComplementaryFile } from './../../../helpers'
 import path from 'path'
 import { capitalize } from '../../../helpers'
 import generateSSRFile from './generateSSRFile'
+import { CommonInterface, OptionInterface } from '../interface'
 
-const generateSSR = ({ components, fileType, name }: Commons) => {
+const generateSSR = (
+  { components, fileType, name }: CommonInterface,
+  {
+    complementary: withComplementary,
+    interface: withInterface,
+    constant: withConstant,
+  }: OptionInterface
+) => {
   const SSRName = `get${capitalize(name)}Props`
   const SSRDir = path.join(components, 'ssr')
 
   generateSSRFile(SSRName, SSRDir, fileType)
 
-  createComplementaryFile(path.join(SSRDir, SSRName), fileType)
+  if (withComplementary) {
+    createComplementaryFile({
+      dir: path.join(SSRDir, SSRName),
+      fileType,
+      withConstant,
+      withInterface,
+    })
+  }
 }
 
 export default generateSSR
