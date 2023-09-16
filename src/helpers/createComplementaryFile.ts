@@ -4,9 +4,10 @@ import fs from 'fs-extra'
 export const createComplementaryFile = (
   dir: string,
   fileType: string,
+  interfaceContent?: string,
   isIcon?: boolean
 ) => {
-  !isIcon &&
+  if (!isIcon) {
     fs.writeFileSync(
       path.join(dir, `constant${fileType}`),
       'export const VAR_NAME = ""',
@@ -14,13 +15,13 @@ export const createComplementaryFile = (
         flag: 'w',
       }
     )
+  }
 
-  fileType === '.ts' &&
-    fs.writeFileSync(
-      path.join(dir, `interface.ts`),
-      'export interface Props {}',
-      {
-        flag: 'w',
-      }
-    )
+  if (fileType === '.ts') {
+    const content = interfaceContent || 'export interface Props {}'
+
+    fs.writeFileSync(path.join(dir, `interface.ts`), content, {
+      flag: 'w',
+    })
+  }
 }

@@ -14,15 +14,24 @@ const generateContext = ({ components, fileType, name }: Commons) => {
 
   registerFile(fileName, path.join(contextDir, `index${fileType}`))
 
+  const contextName = `${capitalize(name)}Context`
+
   fs.writeFileSync(
     path.join(dirName, `index${fileType}x`),
-    generateContextContent(name, fileType),
+    generateContextContent(contextName, fileType),
     {
       flag: 'w',
     }
   )
 
-  createComplementaryFile(dirName, fileType)
+  const interfaceContents = `import { ReactNode } from 'react'\n
+  
+export interface ${contextName}ProviderProps {
+    children: ReactNode
+  }\n
+  export interface ${contextName}Interface {}`
+
+  createComplementaryFile(dirName, fileType, interfaceContents)
 }
 
 export default generateContext
