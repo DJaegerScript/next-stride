@@ -1,5 +1,6 @@
 import { Command } from 'commander'
-import generateFunction, { Schematic } from './functions'
+import generateFunction from './functions'
+import { Schematic } from './functions/interface'
 
 export interface GenerateOptions {
   P: string

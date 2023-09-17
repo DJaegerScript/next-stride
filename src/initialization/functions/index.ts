@@ -1,4 +1,4 @@
-import { NPMLockFile, YarnLockFile, PNPMLockFile } from './constants'
+import { NPM_LOCK_FILE, YARN_LOCK_FILE, PNPM_LOCK_FILE } from './constants'
 import path from 'path'
 import { execSync } from 'child_process'
 import fs from 'fs-extra'
@@ -24,23 +24,23 @@ const initFunction = () => {
 
   const { fileType, packageJSON, rootDir, srcDir } = getProjectData(true)
 
-  const lockFile = fs.existsSync(path.join(rootDir, PNPMLockFile))
-    ? PNPMLockFile
-    : fs.existsSync(path.join(rootDir, YarnLockFile))
-    ? YarnLockFile
-    : NPMLockFile
+  const lockFile = fs.existsSync(path.join(rootDir, PNPM_LOCK_FILE))
+    ? PNPM_LOCK_FILE
+    : fs.existsSync(path.join(rootDir, YARN_LOCK_FILE))
+    ? YARN_LOCK_FILE
+    : NPM_LOCK_FILE
 
   const packageManager: PackageManager = {
     name:
-      lockFile === PNPMLockFile
+      lockFile === PNPM_LOCK_FILE
         ? 'pnpm'
-        : lockFile === YarnLockFile
+        : lockFile === YARN_LOCK_FILE
         ? 'yarn'
         : 'npm',
     command:
-      lockFile === PNPMLockFile
+      lockFile === PNPM_LOCK_FILE
         ? 'pnpm'
-        : lockFile === YarnLockFile
+        : lockFile === YARN_LOCK_FILE
         ? 'yarn'
         : 'npm run',
   }

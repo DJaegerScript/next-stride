@@ -23,3 +23,12 @@ export interface PageProps {
   moduleName: string
   SSRName: string | null
 }
+
+export type Schematic =
+  | 'context'
+  | 'element'
+  | 'hook'
+  | 'module'
+  | 'ssr'
+  | 'util'
+  | 'wrapper'

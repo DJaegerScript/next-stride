@@ -17,6 +17,7 @@ export const eslintConfig = {
     'require-jsdoc': 'off',
     'new-cap': 'off',
     'react/react-in-jsx-scope': 'off',
+    'react/display-name': 'off',
   },
   settings: {
     react: {

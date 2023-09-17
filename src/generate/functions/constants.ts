@@ -5,6 +5,7 @@ import generateIcon from './generateIcon'
 import generateModule from './generateModule'
 import generateSSR from './generateSSR'
 import generateUtil from './generateUtil'
+import generateWrapper from './generateWrapper'
 import { SchematicFunction } from './interface'
 
 export const schematics: SchematicFunction = {
@@ -15,4 +16,5 @@ export const schematics: SchematicFunction = {
   module: generateModule,
   ssr: generateSSR,
   icon: generateIcon,
+  wrapper: generateWrapper,
 }

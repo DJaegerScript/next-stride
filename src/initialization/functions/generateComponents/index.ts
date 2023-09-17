@@ -1,8 +1,8 @@
 import fs from 'fs-extra'
 import kleur from 'kleur'
 import path from 'path'
-import { directories } from './constants'
 import generateIndexContent from './generateIndexContent'
+import { DIRECTORIES } from '../constants'
 
 const generateComponents = (src: string, fileType: string) => {
   console.log('🧱', kleur.blue('Structuring components...'))
@@ -13,7 +13,7 @@ const generateComponents = (src: string, fileType: string) => {
     fs.mkdirSync(componentsDir)
   }
 
-  directories.map((directory) => {
+  DIRECTORIES.map((directory) => {
     const componentDir = path.join(componentsDir, directory)
 
     fs.mkdirSync(componentDir)
@@ -38,7 +38,7 @@ const generateComponents = (src: string, fileType: string) => {
 
   fs.writeFileSync(
     path.join(componentsDir, `index${fileType}`),
-    generateIndexContent(directories)
+    generateIndexContent(DIRECTORIES)
   )
 }
 
