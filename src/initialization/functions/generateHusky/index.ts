@@ -2,7 +2,7 @@ import { execSync } from 'child_process'
 import fs from 'fs-extra'
 import kleur from 'kleur'
 import path from 'path'
-import { PackageManager } from '..'
+import { PackageManager } from '../interface'
 
 const generateHusky = (root: string, { name, command }: PackageManager) => {
   console.log('🐶', kleur.blue('Registering pre-commit...'))

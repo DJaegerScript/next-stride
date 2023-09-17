@@ -1,10 +1,6 @@
 import { Command } from 'commander'
 import generateFunction from './functions'
-import { Schematic } from './functions/interface'
-
-export interface GenerateOptions {
-  P: string
-}
+import { OptionInterface, Schematic } from './functions/interface'
 
 const strideGenerate = (program: Command) =>
   program
@@ -30,7 +26,7 @@ const strideGenerate = (program: Command) =>
       '--no-complementary',
       'prevent stride to generate both interface and constant declaration file'
     )
-    .action((schematic: Schematic, name: string, options: GenerateOptions) =>
+    .action((schematic: Schematic, name: string, options: OptionInterface) =>
       generateFunction(schematic, name, options)
     )
 

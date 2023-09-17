@@ -13,16 +13,15 @@ import generateNextConfig from './generateNextConfig'
 import generateHusky from './generateHusky'
 import kleur from 'kleur'
 import figlet from 'figlet'
-
-export interface PackageManager {
-  name: string
-  command: string
-}
+import { PackageManager } from './interface'
 
 const initFunction = () => {
   console.log('\n', kleur.blue(figlet.textSync('Stride')))
 
-  const { fileType, packageJSON, rootDir, srcDir } = getProjectData(true)
+  const { fileType, packageJSON, rootDir, srcDir } = getProjectData(
+    'Initiating Stride...',
+    true
+  )
 
   const lockFile = fs.existsSync(path.join(rootDir, PNPM_LOCK_FILE))
     ? PNPM_LOCK_FILE

@@ -4,11 +4,8 @@ import os from 'os'
 import kleur from 'kleur'
 import { execSync } from 'child_process'
 
-export const getProjectData = (isInit?: boolean) => {
-  console.log(
-    '\n⏩',
-    kleur.blue(isInit ? 'Initiating Stride...' : 'Generating schematic...')
-  )
+export const getProjectData = (message: string, isInit: boolean = false) => {
+  console.log('\n⏩', kleur.blue(message))
 
   const rootDir = process.cwd()
   const srcDir = path.join(rootDir, 'src')

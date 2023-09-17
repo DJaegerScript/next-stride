@@ -7,6 +7,7 @@ import { Command } from 'commander'
 import { version } from '../package.json'
 import strideInit from './initialization'
 import strideGenerate from './generate'
+import strideClean from './clean'
 
 const main = () => {
   const program = new Command()
@@ -19,6 +20,7 @@ const main = () => {
 
     strideInit(program)
     strideGenerate(program)
+    strideClean(program)
 
     program.showHelpAfterError().parse()
   } catch (error: any) {
