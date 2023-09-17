@@ -60,6 +60,9 @@ const initFunction = () => {
   console.log('🧐', kleur.blue('Running linter and type checking...'))
   execSync(`${packageManager.command} test-all`)
 
+  console.log('🌿', kleur.blue('Commit stride init...'))
+  execSync('git add . && git commit -m "stride init" --no-verify')
+
   console.log('\n✅', kleur.blue('Stride init successfully'))
 }
 
