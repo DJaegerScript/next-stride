@@ -1,19 +1,16 @@
-import { NPM_LOCK_FILE, YARN_LOCK_FILE, PNPM_LOCK_FILE } from './constants'
 import path from 'path'
 import { execSync } from 'child_process'
 import fs from 'fs-extra'
-
 import moveFiles from './moveFiles'
 import generateComponents from './generateComponents'
 import generateLinter from './generateLinter'
 import updatePackage from './updatePackage'
 import generateConfig from './generateConfig'
-import { getProjectData } from '../../helpers'
+import { getPackageManager, getProjectData } from '../../helpers'
 import generateNextConfig from './generateNextConfig'
 import generateHusky from './generateHusky'
 import kleur from 'kleur'
 import figlet from 'figlet'
-import { PackageManager } from './interface'
 
 const initFunction = () => {
   console.log('\n', kleur.blue(figlet.textSync('Stride')))
@@ -23,26 +20,7 @@ const initFunction = () => {
     true
   )
 
-  const lockFile = fs.existsSync(path.join(rootDir, PNPM_LOCK_FILE))
-    ? PNPM_LOCK_FILE
-    : fs.existsSync(path.join(rootDir, YARN_LOCK_FILE))
-    ? YARN_LOCK_FILE
-    : NPM_LOCK_FILE
-
-  const packageManager: PackageManager = {
-    name:
-      lockFile === PNPM_LOCK_FILE
-        ? 'pnpm'
-        : lockFile === YARN_LOCK_FILE
-        ? 'yarn'
-        : 'npm',
-    command:
-      lockFile === PNPM_LOCK_FILE
-        ? 'pnpm'
-        : lockFile === YARN_LOCK_FILE
-        ? 'yarn'
-        : 'npm run',
-  }
+  const { lockFile, packageManager } = getPackageManager(rootDir)
 
   if (!packageJSON.dependencies.next)
     throw new Error('Stride init failed, project is not a next app')
