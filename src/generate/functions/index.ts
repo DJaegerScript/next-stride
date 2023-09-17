@@ -1,7 +1,7 @@
 import { execSync } from 'child_process'
 import path from 'path'
 import { schematics } from './constants'
-import { getProjectData } from '../../helpers'
+import { getPackageManager, getProjectData } from '../../helpers'
 import { OptionInterface, Schematic } from './interface'
 
 const generateFunction = (
@@ -9,7 +9,9 @@ const generateFunction = (
   name: string,
   options: OptionInterface
 ) => {
-  const { fileType, srcDir } = getProjectData('Generating schematic...')
+  const { fileType, srcDir, rootDir } = getProjectData(
+    'Generating schematic...'
+  )
 
   const commons = {
     name,
@@ -19,7 +21,11 @@ const generateFunction = (
 
   schematics[schematic](commons, options)
 
-  execSync('npm run format')
+  const {
+    packageManager: { command },
+  } = getPackageManager(rootDir)
+
+  execSync(`${command} format`)
 }
 
 export default generateFunction

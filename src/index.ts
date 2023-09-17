@@ -24,6 +24,13 @@ const main = () => {
 
     program.showHelpAfterError().parse()
   } catch (error: any) {
+    if (error instanceof TypeError) {
+      console.error(
+        '\n❌',
+        kleur.bold().red(`Failed to generate: schematic not found!`)
+      )
+    }
+
     console.error('❌', kleur.bold().red(error.message))
   }
 }
