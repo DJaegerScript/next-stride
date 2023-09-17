@@ -14,7 +14,7 @@ const generateUtil = (
   }: OptionInterface
 ) => {
   const utilDir = path.join(components, 'utils')
-  const fileName = capitalize(name.toLowerCase(), true)
+  const fileName = capitalize(name.toLowerCase(), [], true)
   const dirName = path.join(utilDir, fileName)
 
   fs.mkdirSync(dirName)

@@ -15,13 +15,20 @@ const generateModule = (commons: CommonInterface, options: OptionInterface) => {
     constant: withConstant,
     interface: withInterface,
   } = options
+  const name = capitalize(commons.name, ['module'])
 
   const moduleDir = path.join(commons.components, 'modules')
-  const moduleName = `${capitalize(commons.name)}Module`
+  const moduleName = `${name}Module`
   const dirName = path.join(moduleDir, moduleName)
 
   if (isSSR) {
-    generateSSR(commons, options)
+    generateSSR(
+      {
+        ...commons,
+        name,
+      },
+      options
+    )
   }
 
   if (fs.existsSync(dirName)) {
@@ -31,11 +38,17 @@ const generateModule = (commons: CommonInterface, options: OptionInterface) => {
   const pageProps: PageProps = {
     pagePath,
     moduleName,
-    SSRName: isSSR ? `get${capitalize(commons.name)}Props` : null,
+    SSRName: isSSR ? `get${name}Props` : null,
   }
 
   if (withPage) {
-    generatePage(commons, pageProps)
+    generatePage(
+      {
+        ...commons,
+        name,
+      },
+      pageProps
+    )
   }
 
   generateModuleFile(dirName, moduleName, moduleDir, commons.fileType, isSSR)

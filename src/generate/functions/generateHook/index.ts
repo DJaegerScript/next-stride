@@ -17,7 +17,7 @@ const generateHook = (
   }: OptionInterface
 ) => {
   const hookDir = path.join(components, 'hooks')
-  const fileName = `use${capitalize(name)}`
+  const fileName = `use${capitalize(name, ['use'])}`
   const dirName = path.join(hookDir, fileName)
 
   fs.mkdirSync(dirName)

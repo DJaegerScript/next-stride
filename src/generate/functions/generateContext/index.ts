@@ -10,29 +10,27 @@ const generateContext = (
   { constant: withConstant }: OptionInterface
 ) => {
   const contextDir = path.join(components, 'contexts')
-  const fileName = `${capitalize(name)}Context`
+  const fileName = `${capitalize(name, ['context'])}Context`
   const dirName = path.join(contextDir, fileName)
 
   fs.mkdirSync(dirName)
 
   registerFile(fileName, path.join(contextDir, `index${fileType}`))
 
-  const contextName = `${capitalize(name)}Context`
-
   fs.writeFileSync(
     path.join(dirName, `index${fileType}x`),
-    generateContextContent(contextName, fileType),
+    generateContextContent(fileName, fileType),
     {
       flag: 'w',
     }
   )
 
-  const interfaceContent = `import { ReactNode } from 'react'\n
-  
-  export interface ${contextName}ProviderProps {
-    children: ReactNode
-  }\n
-  export interface ${contextName}Interface {}`
+  const interfaceContent = `import { ReactNode } from 'react'\n\n
+    export interface ${fileName}ProviderProps {
+      children: ReactNode
+    }\n
+    export interface ${fileName}Interface {}
+  `
 
   createComplementaryFile({
     dir: dirName,

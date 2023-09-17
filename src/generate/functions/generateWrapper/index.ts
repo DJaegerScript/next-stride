@@ -7,7 +7,7 @@ import generateWrapperContent from './generateWrapperContent'
 
 const generateWrapper = ({ components, fileType, name }: CommonInterface) => {
   const wrapperDir = path.join(components, 'wrappers')
-  const fileName = `with${capitalize(name)}`
+  const fileName = `with${capitalize(name, ['with'])}`
 
   registerFile(fileName, path.join(wrapperDir, `index${fileType}`))
 

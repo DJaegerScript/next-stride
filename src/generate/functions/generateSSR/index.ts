@@ -12,7 +12,7 @@ const generateSSR = (
     constant: withConstant,
   }: OptionInterface
 ) => {
-  const SSRName = `get${capitalize(name)}Props`
+  const SSRName = `get${capitalize(name, ['get', 'props', 'prop'])}Props`
   const SSRDir = path.join(components, 'ssr')
 
   generateSSRFile(SSRName, SSRDir, fileType)
