@@ -1,11 +1,11 @@
-import { linterIgnoreFiles } from './constants'
+import { LINTER_IGNORED_FILES } from './constants'
 
 export const parseLinterIgnoredFiles = (fileType: string, lockFile: string) => {
-  fileType === '.ts' && linterIgnoreFiles.push('next-env.d.ts')
+  fileType === '.ts' && LINTER_IGNORED_FILES.push('next-env.d.ts')
 
-  linterIgnoreFiles.push(lockFile)
+  LINTER_IGNORED_FILES.push(lockFile)
 
-  return linterIgnoreFiles
-    .map((linterIgnoreFile) => `${linterIgnoreFile}\n`)
-    .join('')
+  return LINTER_IGNORED_FILES.map(
+    (linterIgnoreFile) => `${linterIgnoreFile}\n`
+  ).join('')
 }

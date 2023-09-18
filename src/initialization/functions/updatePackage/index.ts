@@ -20,7 +20,9 @@ const updatePackage = (
       ...scripts,
       ...(fileType === '.ts' && { 'check-types': 'tsc --pretty --noEmit' }),
       'check-format': 'prettier --check .',
-      'check-lint': 'eslint . --ext ts --ext tsx --ext js',
+      'check-structure':
+        'eslint --parser ./node_modules/eslint-plugin-project-structure/dist/parser.js --rule project-structure/file-structure:error --ext .js,.jsx,.ts,.tsx,.css,.sass,.less,.svg,.png,.jpg,.ico,.yml,.json .',
+      'check-lint': `${command} check-structure && eslint . --ext ts --ext tsx --ext js`,
       format: 'prettier --write .',
       'test-all': `${command} format && ${command} check-format && ${command} check-lint ${
         fileType === '.ts' ? `&& ${command} check-types` : ''
@@ -36,7 +38,7 @@ const updatePackage = (
   )
 
   const additionalDependencies =
-    '-D eslint-config-google eslint-config-prettier eslint-plugin-react prettier husky'
+    '-D eslint-config-google eslint-config-prettier eslint-plugin-react prettier husky eslint-plugin-project-structure'
 
   const tsDependencies =
     '@typescript-eslint/eslint-plugin @typescript-eslint/parser @tsconfig/next'

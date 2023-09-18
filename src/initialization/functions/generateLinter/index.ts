@@ -1,7 +1,11 @@
 import fs from 'fs-extra'
 import kleur from 'kleur'
 import path from 'path'
-import { eslintConfig, prettierConfig } from './constants'
+import {
+  ESLINT_CONFIG,
+  PRETTIER_CONFIG,
+  getDirectoryLinterRules,
+} from './constants'
 import { parseLinterIgnoredFiles } from './parseLinterIgnoredFiles'
 
 const generateLinter = (root: string, fileType: string, lockFile: string) => {
@@ -17,7 +21,7 @@ const generateLinter = (root: string, fileType: string, lockFile: string) => {
 
   fs.writeFileSync(
     path.join(root, '.prettierrc'),
-    JSON.stringify(prettierConfig),
+    JSON.stringify(PRETTIER_CONFIG),
     { flag: 'w' }
   )
 
@@ -26,13 +30,21 @@ const generateLinter = (root: string, fileType: string, lockFile: string) => {
   })
 
   if (fileType === '.ts') {
-    eslintConfig.parser = '@typescript-eslint/parser'
-    eslintConfig.plugins.push('@typescript-eslint')
+    ESLINT_CONFIG.parser = '@typescript-eslint/parser'
+    ESLINT_CONFIG.plugins.push('@typescript-eslint')
   }
 
   fs.writeFileSync(
     path.join(root, '.eslintrc.json'),
-    JSON.stringify(eslintConfig),
+    JSON.stringify(ESLINT_CONFIG),
+    { flag: 'w' }
+  )
+
+  const directoryLinterRules = getDirectoryLinterRules(fileType)
+
+  fs.writeFileSync(
+    path.join(root, 'projectStructure.json'),
+    JSON.stringify(directoryLinterRules),
     { flag: 'w' }
   )
 }
