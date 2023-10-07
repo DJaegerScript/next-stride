@@ -1,3 +1,5 @@
+import { FILE_TYPE } from '../../../helpers/constant'
+
 const generateElementContent = (
   name: string,
   fileType: string,
@@ -5,7 +7,7 @@ const generateElementContent = (
 ) => {
   return `import React from 'react'\n
 ${alias ? '' : 'export'} const ${name}${
-    fileType === '.ts' ? ': React.FC' : ''
+    fileType === FILE_TYPE.TYPESCRIPT ? ': React.FC' : ''
   } = () => {\n
     // TODO: Write element's logic\n
     return <></>

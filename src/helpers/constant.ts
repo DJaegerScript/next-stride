@@ -1,5 +1,10 @@
-export const NPM_LOCK_FILE = 'package-lock.json'
+export const LOCK_FILE = {
+  NPM: 'package-lock.json',
+  YARN: 'yarn.lock',
+  PNPM: 'pnpm-lock.yaml',
+}
 
-export const YARN_LOCK_FILE = 'yarn.lock'
-
-export const PNPM_LOCK_FILE = 'pnpm-lock.yaml'
+export const FILE_TYPE = {
+  TYPESCRIPT: '.ts',
+  JAVASCRIPT: '.js',
+}

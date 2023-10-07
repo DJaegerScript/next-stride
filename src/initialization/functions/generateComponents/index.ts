@@ -2,7 +2,8 @@ import fs from 'fs-extra'
 import kleur from 'kleur'
 import path from 'path'
 import generateIndexContent from './generateIndexContent'
-import { DIRECTORIES } from '../constants'
+import { DIRECTORIES } from '../constant'
+import { FILE_TYPE } from '../../../helpers/constant'
 
 const generateComponents = (src: string, fileType: string) => {
   console.log('🧱', kleur.blue('Structuring components...'))
@@ -18,7 +19,7 @@ const generateComponents = (src: string, fileType: string) => {
 
     fs.mkdirSync(componentDir)
 
-    directory == 'icons' && fileType === '.ts'
+    directory == 'icons' && fileType === FILE_TYPE.TYPESCRIPT
       ? fs.writeFileSync(
           path.join(componentDir, `interface${fileType}`),
           `export interface IconProps {

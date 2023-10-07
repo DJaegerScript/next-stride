@@ -3,6 +3,7 @@ import path from 'path'
 import os from 'os'
 import kleur from 'kleur'
 import { execSync } from 'child_process'
+import { FILE_TYPE } from './constant'
 
 export const getProjectData = (message: string, isInit: boolean = false) => {
   console.log('\n⏩', kleur.blue(message))
@@ -10,7 +11,10 @@ export const getProjectData = (message: string, isInit: boolean = false) => {
   const rootDir = process.cwd()
   const srcDir = path.join(rootDir, 'src')
   const tsConfig = path.join(rootDir, 'tsconfig.json')
-  const fileType = fs.existsSync(tsConfig) ? '.ts' : '.js'
+  const fileType = fs.existsSync(tsConfig)
+    ? FILE_TYPE.TYPESCRIPT
+    : FILE_TYPE.JAVASCRIPT
+
   let packageJSON: any
 
   if (isInit) {

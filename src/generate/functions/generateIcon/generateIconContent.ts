@@ -1,9 +1,17 @@
+import { FILE_TYPE } from '../../../helpers/constant'
+
 const generateIconContent = (name: string, fileType: string) => {
   return `import React from 'react'
-  ${fileType === '.ts' ? "import { IconProps } from './interface'" : ''}
+  ${
+    fileType === FILE_TYPE.TYPESCRIPT
+      ? "import { IconProps } from './interface'"
+      : ''
+  }
 
 
-  export const ${name} ${fileType === '.ts' ? ': React.FC<IconProps>' : ''} = ({
+  export const ${name} ${
+    fileType === FILE_TYPE.TYPESCRIPT ? ': React.FC<IconProps>' : ''
+  } = ({
   fill = 'fill-current',
   stroke,
   className,

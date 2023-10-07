@@ -1,7 +1,9 @@
-import { LINTER_IGNORED_FILES } from './constants'
+import { FILE_TYPE } from '../../../helpers/constant'
+import { LINTER_IGNORED_FILES } from './constant'
 
 export const parseLinterIgnoredFiles = (fileType: string, lockFile: string) => {
-  fileType === '.ts' && LINTER_IGNORED_FILES.push('next-env.d.ts')
+  fileType === FILE_TYPE.TYPESCRIPT &&
+    LINTER_IGNORED_FILES.push('next-env.d.ts')
 
   LINTER_IGNORED_FILES.push(lockFile)
 

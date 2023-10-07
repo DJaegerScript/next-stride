@@ -1,10 +1,14 @@
+import { FILE_TYPE } from '../../../helpers/constant'
+
 const generateSSRContent = (name: string, fileType: string) => {
   return `${
-    fileType === '.ts' ? 'import type {GetServerSideProps} from "next"' : ''
+    fileType === FILE_TYPE.TYPESCRIPT
+      ? 'import type {GetServerSideProps} from "next"'
+      : ''
   } 
   
   export const ${name}${
-    fileType === '.ts' ? ': GetServerSideProps' : ''
+    fileType === FILE_TYPE.TYPESCRIPT ? ': GetServerSideProps' : ''
   } = async (context) => {
         // TODO: Write ssr's logic
   return {

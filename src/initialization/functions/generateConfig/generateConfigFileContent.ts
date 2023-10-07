@@ -1,4 +1,5 @@
-import { DIRECTORIES } from '../constants'
+import { FILE_TYPE } from '../../../helpers/constant'
+import { DIRECTORIES } from '../constant'
 
 const generateConfigFileContent = (fileType: string) => {
   const paths: { [alias: string]: string[] } = {}
@@ -9,7 +10,7 @@ const generateConfigFileContent = (fileType: string) => {
 
   return {
     compilerOptions: {
-      ...(fileType === '.ts' && {
+      ...(fileType === FILE_TYPE.TYPESCRIPT && {
         target: 'es5',
         lib: ['dom', 'dom.iterable', 'esnext'],
         allowJs: true,
@@ -28,7 +29,7 @@ const generateConfigFileContent = (fileType: string) => {
       baseUrl: '.',
       paths,
     },
-    ...(fileType === '.ts' && {
+    ...(fileType === FILE_TYPE.TYPESCRIPT && {
       include: ['next-env.d.ts', '**/*.ts', '**/*.tsx'],
       exclude: ['node_modules'],
       extends: '@tsconfig/next/tsconfig.json',

@@ -3,6 +3,7 @@ import fs from 'fs-extra'
 import kleur from 'kleur'
 import path from 'path'
 import { PackageManager } from '../interface'
+import { FILE_TYPE } from '../../../helpers/constant'
 
 const updatePackage = (
   root: string,
@@ -18,14 +19,16 @@ const updatePackage = (
     ...packageJSON,
     scripts: {
       ...scripts,
-      ...(fileType === '.ts' && { 'check-types': 'tsc --pretty --noEmit' }),
+      ...(fileType === FILE_TYPE.TYPESCRIPT && {
+        'check-types': 'tsc --pretty --noEmit',
+      }),
       'check-format': 'prettier --check .',
       'check-structure':
         'eslint --parser ./node_modules/eslint-plugin-project-structure/dist/parser.js --rule project-structure/file-structure:error --ext .js,.jsx,.ts,.tsx,.css,.sass,.less,.svg,.png,.jpg,.ico,.yml,.json .',
       'check-lint': `${command} check-structure && eslint . --ext ts --ext tsx --ext js`,
       format: 'prettier --write .',
       'test-all': `${command} format && ${command} check-format && ${command} check-lint ${
-        fileType === '.ts' ? `&& ${command} check-types` : ''
+        fileType === FILE_TYPE.TYPESCRIPT ? `&& ${command} check-types` : ''
       }`,
       prepare: 'husky install',
     },
@@ -37,15 +40,14 @@ const updatePackage = (
     { flag: 'w' }
   )
 
-  const additionalDependencies =
-    '-D eslint-config-google eslint-config-prettier eslint-plugin-react prettier husky eslint-plugin-project-structure'
+  const additionalDependencies = `-D eslint eslint-config-prettier eslint-config-next prettier husky eslint-plugin-project-structure`
 
   const tsDependencies =
     '@typescript-eslint/eslint-plugin @typescript-eslint/parser @tsconfig/next'
 
   execSync(
     `${name === 'npm' ? 'npm i' : `${name} add`} ${additionalDependencies} ${
-      fileType === '.ts' ? tsDependencies : ''
+      fileType === FILE_TYPE.TYPESCRIPT ? tsDependencies : ''
     }`
   )
 }

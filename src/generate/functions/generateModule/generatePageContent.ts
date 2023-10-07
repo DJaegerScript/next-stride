@@ -1,3 +1,5 @@
+import { FILE_TYPE } from '../../../helpers/constant'
+
 const generatePageContent = (
   name: string,
   moduleName: string,
@@ -6,10 +8,14 @@ const generatePageContent = (
 ) => {
   return `import React from 'react'
 import { ${moduleName} } from '@modules'
-${fileType === '.ts' ? "import type { NextPage } from 'next'" : ''}
+${
+  fileType === FILE_TYPE.TYPESCRIPT
+    ? "import type { NextPage } from 'next'"
+    : ''
+}
 ${SSRName ? `import { ${SSRName} } from '@ssr'` : ''}
 
-const ${name}${fileType === '.ts' ? ': NextPage' : ''} = (${
+const ${name}${fileType === FILE_TYPE.TYPESCRIPT ? ': NextPage' : ''} = (${
     SSRName ? 'props' : ''
   }) => <${moduleName} ${SSRName ? '{...props}' : ''}/>
 

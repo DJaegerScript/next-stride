@@ -1,10 +1,14 @@
+import { FILE_TYPE } from '../../../helpers/constant'
+
 const generateWrapperContent = (name: string, fileType: string) => {
-  return `${fileType === '.ts' ? `import React from 'react'\n\n` : ''}
+  return `${
+    fileType === FILE_TYPE.TYPESCRIPT ? `import React from 'react'\n\n` : ''
+  }
   export const ${name} = (WrappedComponent${
-    fileType === '.ts' ? ': React.ComponentType' : ''
+    fileType === FILE_TYPE.TYPESCRIPT ? ': React.ComponentType' : ''
   }) => {
     return (props${
-      fileType === '.ts'
+      fileType === FILE_TYPE.TYPESCRIPT
         ? ': JSX.IntrinsicAttributes & { children?: JSX.Element }'
         : ''
     }) => {\n\n
