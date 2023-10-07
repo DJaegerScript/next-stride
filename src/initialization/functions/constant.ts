@@ -8,3 +8,14 @@ export const DIRECTORIES: string[] = [
   'icons',
   'wrappers',
 ]
+
+export const LINTER_CHOICES = [
+  {
+    name: 'Yes',
+    value: true,
+  },
+  {
+    name: 'No',
+    value: false,
+  },
+]

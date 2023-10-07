@@ -1,6 +1,6 @@
 import { execSync } from 'child_process'
 import path from 'path'
-import { schematics } from './constants'
+import { schematics } from './constant'
 import { getPackageManager, getProjectData } from '../../helpers'
 import { OptionInterface, Schematic } from './interface'
 

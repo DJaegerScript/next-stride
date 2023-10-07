@@ -1,7 +1,7 @@
 import fs from 'fs-extra'
 import { getProjectData } from '../../helpers'
 import path from 'path'
-import { DIRECTORIES } from '../../initialization/functions/constants'
+import { DIRECTORIES } from '../../initialization/functions/constant'
 import { execSync } from 'child_process'
 import { cleanConstant } from './cleanConstant'
 import { cleanInterface } from './cleanInterface'

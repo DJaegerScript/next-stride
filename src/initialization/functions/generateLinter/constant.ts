@@ -1,31 +1,39 @@
-export const ESLINT_CONFIG = {
-  env: {
-    browser: true,
-    es2021: true,
-  },
-  extends: ['plugin:react/recommended', 'google', 'prettier'],
-  parser: '',
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
+import { FILE_TYPE } from '../../../helpers/constant'
+
+export const getEslintConfig = (fileType: string) => {
+  const plugins = ['project-structure']
+
+  if (fileType === FILE_TYPE.TYPESCRIPT) {
+    plugins.push('@typescript-eslint')
+  }
+
+  return {
+    extends: ['prettier', 'next/core-web-vitals'],
+    plugins,
+    ...(fileType === FILE_TYPE.TYPESCRIPT && {
+      parser: '@typescript-eslint/parser',
+    }),
+    rules: {
+      'require-jsdoc': 'off',
+      'new-cap': 'off',
+      'react/react-in-jsx-scope': 'off',
+      'react/display-name': 'off',
+      'project-structure/file-structure': 'error',
+      ...(fileType === FILE_TYPE.TYPESCRIPT && {
+        '@typescript-eslint/no-unused-vars': [
+          'error',
+          {
+            argsIgnorePattern: '^_',
+            varsIgnorePattern: '^_',
+            caughtErrorsIgnorePattern: '^_',
+          },
+        ],
+      }),
     },
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-  },
-  plugins: ['react', 'project-structure'],
-  rules: {
-    'require-jsdoc': 'off',
-    'new-cap': 'off',
-    'react/react-in-jsx-scope': 'off',
-    'react/display-name': 'off',
-    'project-structure/file-structure': 'error',
-  },
-  settings: {
-    react: {
-      version: 'detect',
+    settings: {
+      'project-structure/config-path': 'projectStructure.json',
     },
-    'project-structure/config-path': 'projectStructure.json', // json | yaml
-  },
+  }
 }
 
 export const PRETTIER_CONFIG = {
