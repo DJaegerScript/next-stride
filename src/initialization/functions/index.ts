@@ -15,7 +15,7 @@ import figlet from 'figlet'
 const initFunction = () => {
   console.log('\n', kleur.blue(figlet.textSync('Stride')))
 
-  const { fileType, packageJSON, rootDir, srcDir } = getProjectData(
+  const { packageJSON, srcDir, rootDir, fileType } = getProjectData(
     'Initiating Stride...',
     true
   )
@@ -27,7 +27,7 @@ const initFunction = () => {
 
   !fs.existsSync(path.join(rootDir, 'next.config.js')) &&
     generateNextConfig(rootDir)
-  moveFiles(srcDir)
+  moveFiles(srcDir, fileType)
   generateComponents(srcDir, fileType)
   generateLinter(rootDir, fileType, lockFile)
   generateConfig(rootDir, fileType)

@@ -2,10 +2,10 @@ import fs from 'fs-extra'
 import kleur from 'kleur'
 import path from 'path'
 import {
-  ESLINT_CONFIG,
+  getEslintConfig,
   PRETTIER_CONFIG,
   getDirectoryLinterRules,
-} from './constants'
+} from './constant'
 import { parseLinterIgnoredFiles } from './parseLinterIgnoredFiles'
 
 const generateLinter = (root: string, fileType: string, lockFile: string) => {
@@ -29,14 +29,9 @@ const generateLinter = (root: string, fileType: string, lockFile: string) => {
     flag: 'w',
   })
 
-  if (fileType === '.ts') {
-    ESLINT_CONFIG.parser = '@typescript-eslint/parser'
-    ESLINT_CONFIG.plugins.push('@typescript-eslint')
-  }
-
   fs.writeFileSync(
     path.join(root, '.eslintrc.json'),
-    JSON.stringify(ESLINT_CONFIG),
+    JSON.stringify(getEslintConfig(fileType)),
     { flag: 'w' }
   )
 

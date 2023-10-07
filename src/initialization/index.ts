@@ -5,6 +5,6 @@ const strideInit = (program: Command) =>
   program
     .command('init')
     .description('Initialize stride scaffolding')
-    .action(() => initFunction())
+    .action(initFunction)
 
 export default strideInit
